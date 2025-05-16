@@ -119,4 +119,14 @@
           </div>
       </div>
   </nav>
+
+  <section class="w-full h-200 bg-cover bg-center" style="background-image: url('/Asset/Foto about.jpg');">
+    <div class="bg-black/50 w-full h-200 flex items-center justify-center">
+        <div class="bg-gray-900/30 w-full">
+            <div class="justify-center p-5">
+            <h1 class="text-white text-4xl lg:text-6xl font-bold text-center">In every hidden beauty lies an opportunity to explore. We're here to bridge the gap between dreams and journeys.</h1>
+            </div> 
+        </div> 
+    </div>
+  </section>
 </body>
