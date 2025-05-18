@@ -25,3 +25,7 @@ Route::get('/package', function () {
 Route::get('/about', function () {
     return view('about');
 });
+
+Route::get('/admin2', function () {
+    return view('admin2');
+});
