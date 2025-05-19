@@ -29,3 +29,15 @@ Route::get('/about', function () {
 Route::get('/admin2', function () {
     return view('admin2');
 });
+
+Route::get('/admin', function () {
+    return view('admin',['title' => 'Dashboard']);
+});
+
+Route::get('/admin/pesanan', function () {
+    return view('pesanan',['title' => 'Pesanan']);
+});
+
+Route::get('/admin/Data-wisata', function () {
+    return view('datawisata',['title' => 'Data Wisata']);
+});

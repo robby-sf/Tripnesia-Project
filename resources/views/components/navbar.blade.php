@@ -38,7 +38,15 @@
                               @click.outside="open = false"
                               class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50"
                           >
-                          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                          <div class="flex items-center px-4 py-1">
+                            <div class="shrink-0">
+                            <img src="/Asset/profilekosong.jpg" alt="foto profile" class="rounded-full size-8">
+                            </div>
+                            <div class="ml-3">
+                                <div class="text-base/4 font-medium text-gray-400">Robby</div>
+                                <div class="text-sm font-medium text-gray-400">Robby@gmail.com</div>
+                            </div>
+                          </div>
                           <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
                           <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
                       </div>

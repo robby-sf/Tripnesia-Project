@@ -18,7 +18,7 @@
   <!-- Sambutan -->
   <section
   class="h-screen bg-cover bg-center"
-  style="background-image: url('/Asset/Bromo.avif');">
+  style="background-image: url('{{ asset('Asset/Bromo.avif') }}');">
   <div class="bg-black/50 h-full flex items-center justify-center">
     <h1 class="text-white text-4xl lg:text-6xl font-bold">Discover Your Journey</h1>
   </div>
