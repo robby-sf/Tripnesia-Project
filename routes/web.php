@@ -38,6 +38,6 @@ Route::get('/admin/pesanan', function () {
     return view('pesanan',['title' => 'Pesanan']);
 });
 
-Route::get('/admin/Data-wisata', function () {
-    return view('datawisata',['title' => 'Data Wisata']);
+Route::get('/admin/data-wisata', function () {
+    return view('dataWisata',['title' => 'Data Wisata']);
 });

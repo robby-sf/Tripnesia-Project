@@ -16,7 +16,7 @@
 <body>
     <x-Navbar></x-Navbar>
 
-  <section class="w-full h-200 bg-cover bg-center" style="background-image: url('/Asset/Foto about.jpg');">
+  <section class="w-full h-250 bg-cover bg-center" style="background-image: url('/Asset/Foto about.jpg');">
     <div class="bg-black/50 w-full h-200 flex items-center justify-center">
         <div class="bg-gray-900/30 w-full">
             <div class="justify-center p-5">
@@ -25,4 +25,21 @@
         </div> 
     </div>
   </section>
+
+  <div class="w-full bg-[#7E631B]">
+
+    <div class="m-auto">
+        <div class="p-5 flex items-center w-100">
+            <p class="block">"Kami hadir untuk memastikan setiap orang memiliki kesempatan merasakan keindahan Indonesia. 
+            Negeri ini menyimpan banyak surga tersembunyi yang belum banyak dijelajahi. Melalui platform kami, 
+            kamu bisa mengenal tempat-tempat menakjubkan tersebut dan mendapatkan informasi lengkap untuk menjelajahinya."
+            </p>
+        </div>
+    </div>
+
+    <div>
+
+    </div>
+
+  </div>
 </body>

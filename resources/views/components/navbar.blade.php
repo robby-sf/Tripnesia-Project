@@ -1,5 +1,6 @@
-  <nav  x-data="{ open: false, mobileMenuOpen:false }" class="relative  text-white" >
-      <div class="bg-[#2C3E50] text-white flex flex-row items-center flex-nowrap gap-5 p-3 justify-between">
+<nav  x-data="{ open: false, mobileMenuOpen:false }" class="fixed left-0 top-0  w-full z-50" >
+    <div class="relative  text-white">
+        <div class="bg-[#2C3E50] text-white flex flex-row items-center flex-nowrap gap-5 p-3 justify-between">
           <a href="#"><img src="/Asset/Logo Tripnesia.png" alt="Logo Tripnesia" class=" h-8"></a>
               <div class="bg-[#ceab4b] rounded-full items-center flex-grow-[3] mr-5">
                   <input 
@@ -110,4 +111,7 @@
 
           </div>
       </div>
+    </div> 
+    
+    
   </nav>

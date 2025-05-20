@@ -1,5 +1,6 @@
-<nav class="bg-[#214162] relative" x-data="{open:false}">
-    <div class="flex justify-between items-center p-3">
+<nav class="bg-[#214162] sticky top-0" x-data="{open:false}">
+    <div class="relative">
+        <div class="flex justify-between items-center p-3">
         <div class="flex justify-center items-center h-10 font-sans space-x-2">
             <button class="flex items-center justify-center rounded-md bg-[#214162] hover:bg-[#2b4968] p-2">
                 <svg class="block size-6 fill-current text-white"  viewBox="0 0 24 24" stroke-width="1.5"
@@ -52,7 +53,6 @@
                 </div>
             </div>
         </div>
-
-
+    </div>
     </div>
 </nav>
