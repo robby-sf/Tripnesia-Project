@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" type="png" href="/Asset/icon Web.png">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   @vite('resources/css/app.css')
   <title>Tripnesia</title>
 
@@ -16,30 +17,61 @@
 <body>
     <x-Navbar></x-Navbar>
 
-  <section class="w-full h-250 bg-cover bg-center" style="background-image: url('/Asset/Foto about.jpg');">
-    <div class="bg-black/50 w-full h-200 flex items-center justify-center">
+  <section class="w-full h-80 bg-cover bg-center" style="background-image: url('/Asset/Foto about.jpg');">
+    <div class="bg-black/50 w-full h-80 flex items-center justify-center">
         <div class="bg-gray-900/30 w-full">
             <div class="justify-center p-5">
-            <h1 class="text-white text-4xl lg:text-6xl font-bold text-center">In every hidden beauty lies an opportunity to explore. We're here to bridge the gap between dreams and journeys.</h1>
+            <h1 class="text-white text-4xl lg:text-6xl font-bold text-cente r" style="font-family: 'Poppins', sans-serif;">In every hidden beauty lies an opportunity to explore. We're here to bridge the gap between dreams and journeys.</h1>
             </div> 
         </div> 
     </div>
   </section>
 
-  <div class="w-full bg-[#7E631B]">
-
-    <div class="m-auto">
-        <div class="p-5 flex items-center w-100">
-            <p class="block">"Kami hadir untuk memastikan setiap orang memiliki kesempatan merasakan keindahan Indonesia. 
-            Negeri ini menyimpan banyak surga tersembunyi yang belum banyak dijelajahi. Melalui platform kami, 
-            kamu bisa mengenal tempat-tempat menakjubkan tersebut dan mendapatkan informasi lengkap untuk menjelajahinya."
-            </p>
-        </div>
+  <div class="w-full bg-[#ffffff] flex items-center justify-center">
+    <div class="max-w-6xl text-center p-5 mx-auto mt-10 " style="font-family: 'Poppins', sans-serif; ">
+      <h1 class="mb-6 text-4xl font-semibold ">
+        Tripnesia adalah platform pariwisata terbesar di Indonesia
+      </h1>
+      <p class="mb-3">
+        Tripnesia merupakan sebuah platform informasi sekaligus perjalanan yang menyediakan berbagai destinasi wisata alam yang ada di Indonesia.
+      </p>
+      <p>
+        Kami percaya bahwa keindahan alam Indonesia ada untuk dinikmati seluruh orang, melalui platform Tripnesia kami menyediakan berbagai informasi mengenai berbagai destinasi untuk semua orang.
+      </p>
     </div>
-
-    <div>
-
-    </div>
-
   </div>
+
+  <div class="w-full bg-[#ffffff] flex items-center justify-center pt-10" style="font-family: 'Poppins', sans-serif;">
+      <div class="flex flex-col p-8 m-auto">
+        <h1 class="text-center mt-5 font-semibold text-4xl mb-15">
+          Meet Out Team
+        </h1>
+        <div class="flex flex-col sm:flex-row gap-4 mt-8">
+          <div class="flex flex-col shadow-md p-4 items-center">
+            <img src="{{ asset('Asset/profilekosong.jpg') }}" alt="" class="rounded-full size-60">
+            <div class="flex flex-col p-4">
+              <h1 class="text-xl font-medium"> Nama Nama Nama</h1>
+              <h1 > Programmer</h1>
+            </div>
+          </div>
+
+          <div class="flex flex-col shadow-md p-4 items-center">
+            <img src="{{ asset('Asset/profilekosong.jpg') }}" alt="" class="rounded-full size-60">
+            <div class="flex flex-col p-4">
+              <h1 class="text-xl font-medium"> Nama Nama Nama</h1>
+              <h1 > Programmer</h1>
+            </div>
+          </div>
+
+          <div class="flex flex-col shadow-md p-4 items-center">
+            <img src="{{ asset('Asset/profilekosong.jpg') }}" alt="" class="rounded-full size-60">
+            <div class="flex flex-col p-4">
+              <h1 class="text-xl font-medium"> Nama Nama Nama</h1>
+              <h1 > Programmer</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </body>

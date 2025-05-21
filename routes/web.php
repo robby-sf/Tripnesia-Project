@@ -41,3 +41,11 @@ Route::get('/admin/pesanan', function () {
 Route::get('/admin/data-wisata', function () {
     return view('dataWisata',['title' => 'Data Wisata']);
 });
+
+Route::get('/sign-up', function () {
+    return view('SignUp',['title' => 'Dashboard']);
+});
+
+Route::get('/login', function () {
+    return view('Login',['title' => 'Dashboard']);
+});
