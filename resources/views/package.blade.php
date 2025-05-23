@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" type="png" href="/Asset/icon Web.png">
-    @vite('resources/css/app.css')
-    <title>Tripnesia</title>
-
+    @vite('resources/css/app.css') <!-- Pastikan file CSS dimuat -->
+    <title>Tripnesia</title> <!-- Pastikan CSS dimuat -->
     <style>
         [x-cloak] {
             display: none;
@@ -17,6 +16,13 @@
         .btn-purchase {
             background-color: #2d3748;
             color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-align: center;
+            display: inline-block;
+            width: 100%;
+            text-decoration: none;
+            font-weight: bold;
             transition: background-color 0.3s ease;
         }
 
@@ -25,16 +31,19 @@
         }
 
         .navbar {
-            position: relative;
+            position: fixed;
             z-index: 10;
+            width: 100%;
+            /* Pastikan navbar penuh */
+            top: 0;
+            left: 0;
         }
 
         .content-container {
-            margin-top: 85px;
+            margin-top: 100px;
+            /* Menambahkan margin-top agar konten tidak tertutup navbar */
         }
     </style>
-
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body>
@@ -44,148 +53,31 @@
     <div class="container mx-auto py-8 content-container">
         <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Our Travel Packages</h1>
 
-        <!-- Grid daftar paket -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Paket 1 -->
-            <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-                <img src="{{ asset('asset/BorobudurPackage.jpg') }}" alt="Borobudur" class="w-full h-48 object-cover">
+            @foreach ($packages as $package)
+                <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
+                    <img src="{{ asset('asset/' . $package->image) }}" alt="{{ $package->name }}"
+                        class="w-full h-48 object-cover">
 
-                <div class="p-6">
-                    <h2 class="text-2xl font-semibold text-gray-800">Borobudur Temple Tour</h2>
-                    <p class="text-gray-600 mt-2">Explore the magnificent Borobudur Temple, a UNESCO World Heritage
-                        site, with this 2-day cultural tour including a visit to nearby temples and local attractions.
-                    </p>
+                    <div class="p-6">
+                        <h2 class="text-2xl font-semibold text-gray-800">{{ $package->name }}</h2>
+                        <p class="text-gray-600 mt-2">{{ $package->description }}</p>
 
-                    <div class="mt-4">
-                        <span class="text-lg font-semibold text-gray-800">Rp 1,500,000</span>
+                        <div class="mt-4">
+                            <span class="text-lg font-semibold text-gray-800">Rp
+                                {{ number_format($package->price, 0, ',', '.') }}</span>
+                        </div>
+
+                        <!-- Tombol Lanjut Pembayaran -->
+                        <a href="#" class="btn-purchase">
+                            Beli Sekarang
+                        </a>
+
                     </div>
-
-                    <!-- Tombol Lanjut Pembayaran -->
-                    <a href="#"
-                        class="mt-6 inline-block text-white px-6 py-3 rounded-md text-center w-full btn-purchase">
-                        Beli Sekarang
-                    </a>
-
                 </div>
-            </div>
-
-            <!-- Paket 2 -->
-            <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-                <img src="{{ asset('asset/RajaAmpatPackage.jpg') }}" alt="Raja Ampat" class="w-full h-48 object-cover">
-
-                <div class="p-6">
-                    <h2 class="text-2xl font-semibold text-gray-800">Raja Ampat Adventure</h2>
-                    <p class="text-gray-600 mt-2">Experience the stunning underwater world of Raja Ampat, a paradise for
-                        divers. This 5-day tour includes island hopping and snorkeling in crystal-clear waters.</p>
-
-                    <div class="mt-4">
-                        <span class="text-lg font-semibold text-gray-800">Rp 5,000,000</span>
-                    </div>
-
-                    <!-- Tombol Lanjut Pembayaran -->
-                    <a href="#"
-                        class="mt-6 inline-block text-white px-6 py-3 rounded-md text-center w-full btn-purchase">
-                        Beli Sekarang
-                    </a>
-
-                </div>
-            </div>
-
-            <!-- Paket 3 -->
-            <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-                <img src="{{ asset('asset/BromoPackage.jpg') }}" alt="Bromo" class="w-full h-48 object-cover">
-
-                <div class="p-6">
-                    <h2 class="text-2xl font-semibold text-gray-800">Mount Bromo Sunrise Tour</h2>
-                    <p class="text-gray-600 mt-2">Join a 3-day tour to explore the breathtaking views of Mount Bromo,
-                        including a sunrise trek, jeep ride across the volcanic sand, and visit to nearby crater.</p>
-
-                    <div class="mt-4">
-                        <span class="text-lg font-semibold text-gray-800">Rp 2,000,000</span>
-                    </div>
-
-                    <!-- Tombol Lanjut Pembayaran -->
-                    <a href="#"
-                        class="mt-6 inline-block text-white px-6 py-3 rounded-md text-center w-full btn-purchase">
-                        Beli Sekarang
-                    </a>
-
-                </div>
-            </div>
-
-            <!-- Paket 4 -->
-            <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-                <img src="{{ asset('asset/LabuanBajoPackage.jpg') }}" alt="Labuan Bajo"
-                    class="w-full h-48 object-cover">
-
-                <div class="p-6">
-                    <h2 class="text-2xl font-semibold text-gray-800">Labuan Bajo</h2>
-                    <p class="text-gray-600 mt-2">Labuan Bajo, a coastal town on Flores Island, is known for its
-                        stunning landscapes and as the gateway to Komodo National Park, home to the legendary Komodo
-                        dragons.
-                    </p>
-
-                    <div class="mt-4">
-                        <span class="text-lg font-semibold text-gray-800">Rp 5,000,000</span>
-                    </div>
-
-                    <!-- Tombol Lanjut Pembayaran -->
-                    <a href="#"
-                        class="mt-6 inline-block text-white px-6 py-3 rounded-md text-center w-full btn-purchase">
-                        Beli Sekarang
-                    </a>
-
-                </div>
-            </div>
-
-            <!-- Paket 5 -->
-            <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-                <img src="{{ asset('asset/TobaPackage.jpg') }}" alt="Toba Lake" class="w-full h-48 object-cover">
-
-                <div class="p-6">
-                    <h2 class="text-2xl font-semibold text-gray-800">Toba Lake</h2>
-                    <p class="text-gray-600 mt-2">Lake Toba, located in northern Sumatra, Indonesia, is the world's
-                        largest volcanic lake, formed by a massive eruption over 74,000 years ago.
-                    </p>
-
-                    <div class="mt-4">
-                        <span class="text-lg font-semibold text-gray-800">Rp 3,250,000</span>
-                    </div>
-
-                    <!-- Tombol Lanjut Pembayaran -->
-                    <a href="#"
-                        class="mt-6 inline-block text-white px-6 py-3 rounded-md text-center w-full btn-purchase">
-                        Beli Sekarang
-                    </a>
-
-                </div>
-            </div>
-
-            <!-- Paket 6 -->
-            <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-                <img src="{{ asset('asset/RinjaniPackage.jpg') }}" alt="Mount Rinjani" class="w-full h-48 object-cover">
-
-                <div class="p-6">
-                    <h2 class="text-2xl font-semibold text-gray-800">Mount Rinjani</h2>
-                    <p class="text-gray-600 mt-2">Mount Rinjani, standing at 3,726 meters on Lombok Island, is
-                        Indonesia’s second-highest volcano, famous for its striking crater lake, Segara Anak.
-                    </p>
-
-                    <div class="mt-4">
-                        <span class="text-lg font-semibold text-gray-800">Rp 1,500,000</span>
-                    </div>
-
-                    <!-- Tombol Lanjut Pembayaran -->
-                    <a href="#"
-                        class="mt-6 inline-block text-white px-6 py-3 rounded-md text-center w-full btn-purchase">
-                        Beli Sekarang
-                    </a>
-
-                </div>
-
-            </div>
+            @endforeach
         </div>
-
+    </div>
 </body>
 
 </html>
