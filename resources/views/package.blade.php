@@ -113,8 +113,78 @@
                 </div>
             </div>
 
+            <!-- Paket 4 -->
+            <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
+                <img src="{{ asset('asset/LabuanBajoPackage.jpg') }}" alt="Labuan Bajo"
+                    class="w-full h-48 object-cover">
+
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">Labuan Bajo</h2>
+                    <p class="text-gray-600 mt-2">Labuan Bajo, a coastal town on Flores Island, is known for its
+                        stunning landscapes and as the gateway to Komodo National Park, home to the legendary Komodo
+                        dragons.
+                    </p>
+
+                    <div class="mt-4">
+                        <span class="text-lg font-semibold text-gray-800">Rp 5,000,000</span>
+                    </div>
+
+                    <!-- Tombol Lanjut Pembayaran -->
+                    <a href="#"
+                        class="mt-6 inline-block text-white px-6 py-3 rounded-md text-center w-full btn-purchase">
+                        Beli Sekarang
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- Paket 5 -->
+            <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
+                <img src="{{ asset('asset/TobaPackage.jpg') }}" alt="Toba Lake" class="w-full h-48 object-cover">
+
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">Toba Lake</h2>
+                    <p class="text-gray-600 mt-2">Lake Toba, located in northern Sumatra, Indonesia, is the world's
+                        largest volcanic lake, formed by a massive eruption over 74,000 years ago.
+                    </p>
+
+                    <div class="mt-4">
+                        <span class="text-lg font-semibold text-gray-800">Rp 3,250,000</span>
+                    </div>
+
+                    <!-- Tombol Lanjut Pembayaran -->
+                    <a href="#"
+                        class="mt-6 inline-block text-white px-6 py-3 rounded-md text-center w-full btn-purchase">
+                        Beli Sekarang
+                    </a>
+
+                </div>
+            </div>
+
+            <!-- Paket 6 -->
+            <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
+                <img src="{{ asset('asset/RinjaniPackage.jpg') }}" alt="Mount Rinjani" class="w-full h-48 object-cover">
+
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">Mount Rinjani</h2>
+                    <p class="text-gray-600 mt-2">Mount Rinjani, standing at 3,726 meters on Lombok Island, is
+                        Indonesia’s second-highest volcano, famous for its striking crater lake, Segara Anak.
+                    </p>
+
+                    <div class="mt-4">
+                        <span class="text-lg font-semibold text-gray-800">Rp 1,500,000</span>
+                    </div>
+
+                    <!-- Tombol Lanjut Pembayaran -->
+                    <a href="#"
+                        class="mt-6 inline-block text-white px-6 py-3 rounded-md text-center w-full btn-purchase">
+                        Beli Sekarang
+                    </a>
+
+                </div>
+
+            </div>
         </div>
-    </div>
 
 </body>
 
