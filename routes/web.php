@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Destination;
+use App\Http\Controllers\DestinationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -49,3 +51,5 @@ Route::get('/sign-up', function () {
 Route::get('/login', function () {
     return view('Login',['title' => 'Dashboard']);
 });
+
+Route::get('/destination/{slug}', [DestinationController::class, 'show']);
