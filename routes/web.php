@@ -2,6 +2,7 @@
 
 use App\Models\Destination;
 use App\Http\Controllers\DestinationController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PackageController;
 
@@ -43,13 +44,15 @@ Route::get('/admin/data-wisata', function () {
     return view('dataWisata', ['title' => 'Data Wisata']);
 });
 
-Route::get('/sign-up', function () {
-    return view('SignUp', ['title' => 'Dashboard']);
-});
-
 Route::get('/login', function () {
     return view('Login', ['title' => 'Dashboard']);
 });
 
 Route::get('/destination', [DestinationController::class, 'index']);
 Route::get('/destination/{slug}', [DestinationController::class, 'show']);
+
+// Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+// Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
+Route::post('/register', [AuthController::class, 'register'])->name('register');

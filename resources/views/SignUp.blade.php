@@ -23,42 +23,63 @@ style="background-image: url('/Asset/LoginBack.jpg');">
             Buat Akun Tripnesia
         </h2>
 
-        <div class="mb-4 flex gap-4">
-            <div class="flex-1">
-                <label class="block text-sm font-medium text-gray-600" >Nama Depan</label>
-                <input class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
-                style="background-color: #EBDCC5;">
-            </div>
-            <div class="flex-1">
-                <label class="block text-sm font-medium text-gray-600" >Nama Belakang</label>
-                <input class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
-                style="background-color: #EBDCC5;">
-            </div>
-        </div>
+    
+        <form action="{{ route('register') }}" method="POST">
+            @csrf
+                <div class="mb-4 flex gap-4">
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-600" >Nama Depan</label>
+                        <input class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
+                        style="background-color: #EBDCC5;" type="text" name="nama_depan"  required value="{{ old('nama_depan') }}">
+                        @error('nama_depan')
+                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    
+                    <div class="flex-1">
+                        <label class="block text-sm font-medium text-gray-600" >Nama Belakang</label>
+                        <input class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
+                        style="background-color: #EBDCC5;" type="text" name="nama_belakang"  required value="{{ old('nama_belakang') }}">
+                        @error('nama_belakang')
+                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
 
-        <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-600" >Email</label>
-                <input class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
-                style="background-color: #EBDCC5;">
-        </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-600" >Email</label>
+                        <input class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
+                        style="background-color: #EBDCC5;"type="email" name="email"  required value="{{ old('email') }}">
+                        @error('email')
+                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                </div>
 
-        <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-600" >Password</label>
-                <input class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
-                style="background-color: #EBDCC5;">
-        </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-600" >Password</label>
+                        <input class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
+                        style="background-color: #EBDCC5;" type="password" name="password"  required>
+                        @error('password')
+                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                </div>
 
-        <div class="mb-4">
-            <label class="block text-sm font-medium text-gray-600" >Confirmation Password</label>
-                <input class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
-                style="background-color: #EBDCC5;">
-        </div>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-600" >Confirmation Password</label>
+                        <input class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
+                        style="background-color: #EBDCC5;" type="password" name="password_confirmation"  required>
+                        @error('password_confirmation')
+                        <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                </div>
 
-        <button 
-        type="submit" class="w-full py-3 bg-[#1C787F] text-white rounded-full hover:bg-cyan-900 focus:outline-none">
-            Daftar
-        </button>
+                <button 
+                type="submit" class="w-full py-3 bg-[#1C787F] text-white rounded-full hover:bg-cyan-900 focus:outline-none">
+                    Daftar
+                </button>
 
+        </form>
+       
     </div>
 
 </body>
