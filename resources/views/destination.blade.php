@@ -34,8 +34,9 @@
   </section>
 
   <section class="py-16 bg-white relative" x-data="{
-    scrollLeft() { $refs.slider.scrollBy({ left: -300, behavior: 'smooth' }) },
-    scrollRight() { $refs.slider.scrollBy({ left: 300, behavior: 'smooth' }) }
+    destination: {{ Js::from($destination) }},
+    scrollLeft() { $refs.slider.scrollBy({ left: -500, behavior: 'smooth' }) },
+    scrollRight() { $refs.slider.scrollBy({ left: 500, behavior: 'smooth' }) }
   }">
     <div class="max-w-7xl mx-auto px-4">
       <h2 class="text-3xl font-semibold mb-10 text-center">
@@ -44,25 +45,17 @@
 
         <div class="relative">
           <div class="flex overflow-x-auto space-x-6 pb-4 scroll-smooth no-scrollbar" x-ref="slider">
-            <template x-for="(dest, index) in [
-              { img: '/Asset/Raja Ampat.jpg', title: 'Raja Ampat', desc: 'Keindahan bawah laut Papua' },
-              { img: '/Asset/Bromo.avif', title: 'Gunung Bromo', desc: 'Sunrise menawan' },
-              { img: '/Asset/Labuan Bajo.jpg', title: 'Labuan Bajo', desc: 'Gerbang menuju Komodo' },
-              { img: '/Asset/Bali.jpg', title: 'Bali', desc: 'Pulau dewata' },
-              { img: '/Asset/Dieng.webp', title: 'Dieng', desc: 'Negeri di atas awan' },
-              { img: '/Asset/Pulau Komodo.jpg', title: 'Pulau Komodo', desc: 'Habitat komodo asli' }
-            ]" :key="index">
-              <div class="min-w-[250px] flex-shrink-0 bg-white rounded-xl shadow-md 
+            <template x-for="(dest, index) in destination" :key="index">
+              <a :href="'/destination/' + dest.slug" class="max-w-md flex-shrink-0 bg-white rounded-xl shadow-md 
                           transition-transform transform hover:scale-105 duration-300 ease-in-out overflow-hidden">
-                <img :src="dest.img" class="w-full h-40 object-cover rounded-t-xl" />
+                <img :src="'/Asset/' + dest.gambar" class="w-full h-40 object-cover rounded-t-xl" />
                 <div class="p-4">
-                  <h4 class="font-bold text-lg" x-text="dest.title"></h4>
-                  <p class="text-sm text-gray-600" x-text="dest.desc"></p>
+                  <h4 class="font-bold text-lg" x-text="dest.nama"></h4>
+                  <p class="text-sm text-gray-600 line-clamp-2" x-text="dest.deskripsi"></p>
                 </div>
-              </div>
+              </a>
             </template>
           </div>
-
 
           <button @click="scrollLeft" class="absolute left-0 top-1/2 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-gray-100">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">

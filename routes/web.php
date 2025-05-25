@@ -51,4 +51,5 @@ Route::get('/login', function () {
     return view('Login', ['title' => 'Dashboard']);
 });
 
+Route::get('/destination', [DestinationController::class, 'index']);
 Route::get('/destination/{slug}', [DestinationController::class, 'show']);

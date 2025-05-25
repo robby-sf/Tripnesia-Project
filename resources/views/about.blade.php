@@ -17,11 +17,11 @@
 <body>
     <x-Navbar></x-Navbar>
 
-  <section class="w-full h-80 bg-cover bg-center" style="background-image: url('/Asset/Foto about.jpg');">
+  <section class="w-full h-80 bg-cover bg-center" style="background-image: url('{{ asset('Asset/Gunung Agung.jpg') }}');">
     <div class="bg-black/50 w-full h-80 flex items-center justify-center">
         <div class="bg-gray-900/30 w-full">
             <div class="justify-center p-5">
-            <h1 class="text-white text-4xl lg:text-6xl font-bold text-cente r" style="font-family: 'Poppins', sans-serif;">In every hidden beauty lies an opportunity to explore. We're here to bridge the gap between dreams and journeys.</h1>
+            <h1 class="text-white text-xl md:text-2xl lg:text-3xl font-bold text-center" style="font-family: 'Poppins', sans-serif;">In every hidden beauty lies an opportunity to explore. We're here to bridge the gap between dreams and journeys.</h1>
             </div> 
         </div> 
     </div>
