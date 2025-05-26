@@ -2,9 +2,11 @@
 
 use App\Models\Destination;
 use App\Http\Controllers\DestinationController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SignUpController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\LoginController;
+use Illuminate\Auth\Events\Login;
 
 Route::get('/', function () {
     return view('index');
@@ -44,9 +46,6 @@ Route::get('/admin/data-wisata', function () {
     return view('dataWisata', ['title' => 'Data Wisata']);
 });
 
-Route::get('/login', function () {
-    return view('Login', ['title' => 'Dashboard']);
-});
 
 Route::get('/destination', [DestinationController::class, 'index']);
 Route::get('/destination/{slug}', [DestinationController::class, 'show']);
@@ -54,5 +53,9 @@ Route::get('/destination/{slug}', [DestinationController::class, 'show']);
 // Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
 // Route::post('/register', [AuthController::class, 'register']);
 
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register.form');
-Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::get('/register', [SignUpController::class, 'showRegisterForm'])->name('register.form');
+Route::post('/register', [SignUpController::class, 'register'])->name('register');
+
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
+Route::post('/login', [LoginController::class, 'login'])->name('login');

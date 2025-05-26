@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class AuthController extends Controller
+class SignUpController extends Controller
 {
     public function showRegisterForm()
     {
