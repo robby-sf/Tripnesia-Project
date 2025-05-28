@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" type="png" href="/Asset/icon Web.png">
-    @vite('resources/css/app.css') <!-- Pastikan file CSS dimuat -->
-    <title>Tripnesia</title> <!-- Pastikan CSS dimuat -->
+    @vite('resources/css/app.css')
+    <title>Tripnesia</title>
     <style>
         [x-cloak] {
             display: none;
@@ -34,14 +34,12 @@
             position: fixed;
             z-index: 10;
             width: 100%;
-            /* Pastikan navbar penuh */
             top: 0;
             left: 0;
         }
 
         .content-container {
             margin-top: 100px;
-            /* Menambahkan margin-top agar konten tidak tertutup navbar */
         }
     </style>
 </head>
