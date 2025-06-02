@@ -19,7 +19,7 @@
           <h1 class="text-3xl font-bold text-gray-800 mb-4">{{ $destination->nama }}</h1>
 
           <img 
-            src="{{ asset('Asset/'.$destination->gambar) }}" 
+            src="{{ asset('storage/' . $destination->gambar) }}" 
             alt="{{ $destination->nama }}" 
             class="w-full h-64 object-cover rounded-lg mb-6"
           />

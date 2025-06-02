@@ -42,9 +42,11 @@ Route::get('/admin/pesanan', function () {
     return view('pesanan', ['title' => 'Pesanan']);
 });
 
-Route::get('/admin/data-wisata', function () {
-    return view('dataWisata', ['title' => 'Data Wisata']);
-});
+
+Route::get('/admin/destination-data', [DestinationController::class, 'data'])->name('Destinations');
+
+Route::get('/admin/destination/create',[DestinationController::class,'create'])->name('create');
+Route::post('/admin/destination/create',[DestinationController::class,'store'])->name('store');
 
 
 Route::get('/destination', [DestinationController::class, 'index']);
