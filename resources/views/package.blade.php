@@ -2,15 +2,13 @@
 <html class="h-full bg-gray-100">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" type="png" href="/Asset/icon Web.png">
-    @vite('resources/css/app.css')
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tripnesia</title>
+    @vite('resources/css/app.css')
     <style>
-        [x-cloak] {
-            display: none;
+        .justify-text {
+            text-align: justify;
         }
 
         .btn-purchase {
@@ -59,7 +57,7 @@
 
                     <div class="p-6">
                         <h2 class="text-2xl font-semibold text-gray-800">{{ $package->name }}</h2>
-                        <p class="text-gray-600 mt-2">{{ $package->description }}</p>
+                        <p class="text-gray-600 mt-2 justify-text">{{ $package->description }}</p>
 
                         <div class="mt-4">
                             <span class="text-lg font-semibold text-gray-800">Rp
@@ -67,7 +65,7 @@
                         </div>
 
                         <!-- Tombol Lanjut Pembayaran -->
-                        <a href="#" class="btn-purchase">
+                        <a href="{{ route('checkout.show', $package->id) }}" class="btn-purchase">
                             Beli Sekarang
                         </a>
 
