@@ -48,6 +48,10 @@ Route::get('/admin/destination-data', [DestinationController::class, 'data'])->n
 Route::get('/admin/destination/create',[DestinationController::class,'create'])->name('create');
 Route::post('/admin/destination/create',[DestinationController::class,'store'])->name('store');
 
+Route::get('/admin/destination/{id}/edit',[DestinationController::class, 'edit'])->name('edit');
+Route::put('/admin/destination/{id}',[DestinationController::class, 'update'])->name('update');
+
+Route::delete('/admin/destination/{id}', [DestinationController::class, 'delete'])->name('destination.delete');
 
 Route::get('/destination', [DestinationController::class, 'index']);
 Route::get('/destination/{slug}', [DestinationController::class, 'show']);

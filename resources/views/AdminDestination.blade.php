@@ -63,8 +63,7 @@
                                     </a>
 
 
-                                    <!-- Edit (Pencil) -->
-                                    <a href="/admin/destination/{{ $dest->slug }}/edit" class="text-yellow-500 hover:text-yellow-700" title="Edit">
+                                    <a href="/admin/destination/{{ $dest->id }}/edit" class="text-yellow-500 hover:text-yellow-700" title="Edit">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -72,8 +71,7 @@
                                         </svg>
                                     </a>
 
-                                    <!-- Delete (Trash Can) -->
-                                    <form action="/admin/destination/{{ $dest->slug }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus destinasi ini?')" class="inline">
+                                    <form action="{{  route('destination.delete', $dest->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus destinasi ini?')" class="inline">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-600 hover:text-red-800" title="Hapus">
