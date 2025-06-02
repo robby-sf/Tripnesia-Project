@@ -16,24 +16,24 @@ class SignUpController extends Controller
     }
 
     public function register(Request $request)
-{
-    $request->validate([
-        'nama_depan' => 'required|string|max:50',
-        'nama_belakang' => 'required|string|max:50',
-        'email' => 'required|email|unique:users,email',
-        'password' => 'required|min:6|confirmed',
-    ]);
-    
-    $fullName = $request->nama_depan . ' ' . $request->nama_belakang;
+    {
+        $request->validate([
+            'nama_depan' => 'required|string|max:50',
+            'nama_belakang' => 'required|string|max:50',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed',
+        ]);
 
-    $user = User::create([
-        'nama' => $fullName,
-        'email' => $request->email,
-        'password' => Hash::make($request->password),
-    ]);
+        $fullName = $request->nama_depan . ' ' . $request->nama_belakang;
 
-    Auth::login($user);
+        $user = User::create([
+            'nama' => $fullName,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-    return redirect('/');
-}
+        Auth::login($user);
+
+        return redirect('/');
+    }
 }

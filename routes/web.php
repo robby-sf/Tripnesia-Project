@@ -1,16 +1,18 @@
 <?php
 
+use App\Http\Controllers\CheckoutController;
 use App\Models\Destination;
 use App\Http\Controllers\DestinationController;
 use App\Http\Controllers\SignUpController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Auth\Events\Login;
 
 Route::get('/', function () {
     return view('index');
-});
+})->name('home');
 
 Route::get('/Page', function () {
     return view('Page');
@@ -61,3 +63,17 @@ Route::post('/register', [SignUpController::class, 'register'])->name('register'
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/checkout/{id}', [CheckoutController::class, 'show'])->name('checkout.show');
+    Route::post('/checkout/process/{id}', [CheckoutController::class, 'process'])->name('checkout.process');
+});
+
+Route::post('/midtrans/notification', [CheckoutController::class, 'notificationHandler'])->name('midtrans.notification');
+
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/pesanan', [OrderController::class, 'index'])->name('pesanan.index');
+    Route::get('/pesanan/{transaction}', [OrderController::class, 'show'])->name('pesanan.show');
+    Route::post('/pesanan/{transaction}/update-status', [OrderController::class, 'updateStatus'])->name('pesanan.updateStatus');
+    Route::delete('/pesanan/{transaction}', [OrderController::class, 'destroy'])->name('pesanan.destroy');
+});
