@@ -10,12 +10,12 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::all();
-        return view('events.index', compact('events'));
+        return view('event', compact('events'));
     }
 
     public function show($slug)
     {
         $event = Event::where('slug', $slug)->firstOrFail();
-        return view('events.show', compact('events'));
+        return view('events.show', compact('event'));
     }
 }
