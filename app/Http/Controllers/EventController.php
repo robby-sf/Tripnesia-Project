@@ -16,6 +16,6 @@ class EventController extends Controller
     public function show($slug)
     {
         $event = Event::where('slug', $slug)->firstOrFail();
-        return view('events.show', compact('event'));
+        return view('events.show', compact('events'));
     }
 }
