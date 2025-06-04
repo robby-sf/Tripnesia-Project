@@ -12,7 +12,7 @@
     <h1 class="text-3xl font-bold mb-8 text-center">Daftar Event Tripnesia</h1>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      @foreach ($events as $event)
+    
         <div class="bg-white shadow-lg rounded-lg p-4">
           <h2 class="text-xl font-semibold mb-2">
             <a href="{{ route('events.show', $event->slug) }}" class="text-blue-600 hover:underline">
@@ -22,7 +22,7 @@
           <p class="text-gray-500 text-sm mb-2">{{ $event->event_date }} | {{ $event->location }}</p>
           <p class="text-gray-700">{{ Str::limit($event->description, 100) }}</p>
         </div>
-      @endforeach
+    
     </div>
   </div>
 

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\LoginController;
 use Illuminate\Auth\Events\Login;
+use App\Http\Controllers\EventController;
 
 Route::get('/', function () {
     return view('index');
@@ -20,9 +21,6 @@ Route::get('/destination', function () {
     return view('destination');
 });
 
-Route::get('/event', function () {
-    return view('event');
-});
 
 Route::get('/package', [PackageController::class, 'index']);
 
@@ -59,3 +57,6 @@ Route::post('/register', [SignUpController::class, 'register'])->name('register'
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+Route::get('/events', [EventController::class, 'index']);
+Route::get('/events/{slug}', [EventController::class, 'show']);
