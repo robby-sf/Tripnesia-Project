@@ -58,5 +58,11 @@ Route::post('/register', [SignUpController::class, 'register'])->name('register'
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Route::get('/events', [EventController::class, 'index']);
-Route::get('/events/{slug}', [EventController::class, 'show']);
+Route::get('/event', [EventController::class, 'index']);
+Route::get('/event/{slug}', [EventController::class, 'show'])->name('events.show');
+
+// Admin - Tambah Event
+Route::get('/admin/event/create', [EventController::class, 'create'])->name('admin.event.create');
+Route::post('/admin/event', [EventController::class, 'store'])->name('admin.event.store');
+
+
