@@ -2,63 +2,59 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Package;
 
 class PackageSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        // Menambahkan paket pertama
         Package::create([
-            'name' => 'Borobudur Temple Tour',
+            'name' => 'Tur Candi Borobudur',
             'image' => 'BorobudurPackage.jpg',
-            'description' => 'Explore the magnificent Borobudur Temple, a UNESCO World Heritage site, with this 2-day cultural tour including a visit to nearby temples and local attractions.',
+            'description' => 'Jelajahi keindahan Candi Borobudur, situs Warisan Dunia UNESCO, dengan tur budaya 2 hari termasuk kunjungan ke candi dan objek wisata sekitar.',
             'price' => 1500000,
+            'tickets' => '1 tiket hotel, 1 tiket wisata, 1 tiket makan',
         ]);
 
-        // Menambahkan paket kedua
         Package::create([
-            'name' => 'Raja Ampat Adventure',
+            'name' => 'Petualangan Raja Ampat',
             'image' => 'RajaAmpatPackage.jpg',
-            'description' => 'Experience the stunning underwater world of Raja Ampat, a paradise for divers. This 5-day tour includes island hopping and snorkeling in crystal-clear waters.',
+            'description' => 'Rasakan keindahan bawah laut Raja Ampat, surga bagi para penyelam. Tur 5 hari ini mencakup island hopping dan snorkeling di perairan jernih.',
             'price' => 5000000,
+            'tickets' => '1 tiket hotel, 1 tiket snorkeling, 1 tiket makan',
         ]);
 
-        // Menambahkan paket ketiga
         Package::create([
-            'name' => 'Mount Bromo Sunrise Tour',
+            'name' => 'Tur Matahari Terbit Gunung Bromo',
             'image' => 'BromoPackage.jpg',
-            'description' => 'Join a 3-day tour to explore the breathtaking views of Mount Bromo, including a sunrise trek, jeep ride across the volcanic sand, and visit to nearby crater.',
+            'description' => 'Ikuti tur 3 hari menjelajahi pemandangan menakjubkan Gunung Bromo, termasuk trekking matahari terbit, perjalanan jeep melintasi pasir vulkanik, dan kunjungan ke kawah.',
             'price' => 2000000,
+            'tickets' => '1 tiket jeep, 1 tiket wisata, 1 tiket makan',
         ]);
 
-        // Menambahkan paket keempat
         Package::create([
-            'name' => 'Labuan Bajo',
+            'name' => 'Labuan Bajo Eksotis',
             'image' => 'LabuanBajoPackage.jpg',
-            'description' => 'Labuan Bajo, a coastal town on Flores Island, is known for its stunning landscapes and as the gateway to Komodo National Park, home to the legendary Komodo dragons.',
+            'description' => 'Labuan Bajo, kota pesisir di Pulau Flores, terkenal dengan pemandangan memukau dan sebagai gerbang ke Taman Nasional Komodo, rumah bagi komodo legendaris.',
             'price' => 5000000,
+            'tickets' => '1 tiket kapal, 1 tiket wisata, 1 tiket makan',
         ]);
 
-        // Menambahkan paket kelima
         Package::create([
-            'name' => 'Toba Lake',
+            'name' => 'Danau Toba Menawan',
             'image' => 'TobaPackage.jpg',
-            'description' => 'Lake Toba, located in northern Sumatra, Indonesia, is the world\'s largest volcanic lake, formed by a massive eruption over 74,000 years ago.',
+            'description' => 'Danau Toba di Sumatera Utara adalah danau vulkanik terbesar di dunia, terbentuk dari letusan besar lebih dari 74.000 tahun lalu.',
             'price' => 3250000,
+            'tickets' => '1 tiket hotel, 1 tiket wisata, 1 tiket makan',
         ]);
 
-        // Menambahkan paket keenam
         Package::create([
-            'name' => 'Mount Rinjani',
+            'name' => 'Pendakian Gunung Rinjani',
             'image' => 'RinjaniPackage.jpg',
-            'description' => 'Mount Rinjani, standing at 3,726 meters on Lombok Island, is Indonesia’s second-highest volcano, famous for its striking crater lake, Segara Anak.',
+            'description' => 'Gunung Rinjani setinggi 3.726 meter di Pulau Lombok adalah gunung berapi tertinggi kedua di Indonesia, terkenal dengan danau kawahnya yang indah, Segara Anak.',
             'price' => 1500000,
+            'tickets' => '1 tiket trekking, 1 tiket hotel, 1 tiket makan',
         ]);
     }
 }
