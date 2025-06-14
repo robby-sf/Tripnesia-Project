@@ -9,6 +9,7 @@ use App\Http\Controllers\PackageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Auth\Events\Login;
+use App\Http\Controllers\EventController;
 
 Route::get('/', function () {
     return view('index');
@@ -22,9 +23,6 @@ Route::get('/destination', function () {
     return view('destination');
 });
 
-Route::get('/event', function () {
-    return view('event');
-});
 
 Route::get('/package', [PackageController::class, 'index']);
 
@@ -50,6 +48,10 @@ Route::get('/admin/destination-data', [DestinationController::class, 'data'])->n
 Route::get('/admin/destination/create',[DestinationController::class,'create'])->name('create');
 Route::post('/admin/destination/create',[DestinationController::class,'store'])->name('store');
 
+Route::get('/admin/destination/{id}/edit',[DestinationController::class, 'edit'])->name('edit');
+Route::put('/admin/destination/{id}',[DestinationController::class, 'update'])->name('update');
+
+Route::delete('/admin/destination/{id}', [DestinationController::class, 'delete'])->name('destination.delete');
 
 Route::get('/destination', [DestinationController::class, 'index']);
 Route::get('/destination/{slug}', [DestinationController::class, 'show']);
@@ -77,3 +79,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('/pesanan/{transaction}/update-status', [OrderController::class, 'updateStatus'])->name('pesanan.updateStatus');
     Route::delete('/pesanan/{transaction}', [OrderController::class, 'destroy'])->name('pesanan.destroy');
 });
+
+Route::get('/event', [EventController::class, 'index']);
+Route::get('/event/{slug}', [EventController::class, 'show'])->name('events.show');
+
+// Admin - Tambah Event
+Route::get('/admin/event/create', [EventController::class, 'create'])->name('admin.event.create');
+Route::post('/admin/event', [EventController::class, 'store'])->name('admin.event.store');
+
+
