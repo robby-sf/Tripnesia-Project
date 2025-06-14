@@ -2,21 +2,23 @@
     <div class="relative  text-white">
         <div class="bg-[#2C3E50] text-white flex flex-row items-center flex-nowrap gap-5 p-3 justify-between">
           <a href="#"><img src="/Asset/Logo Tripnesia.png" alt="Logo Tripnesia" class=" h-8"></a>
-              <div class="bg-[#ceab4b] rounded-full items-center flex-grow-[3] mr-5">
-                  <input 
-                  type="text"
-                  placeholder="Search " 
-                  class="bg-transparent outline-none w-full placeholder-gray-500 placeholder:text-sm text-left text-black ml-4">
-              </div>
+          <div class="flex w-[30%] bg-white rounded-full items-center p-2 mr-5">
+              <input 
+              type="text"
+              placeholder="Search " 
+              class="bg-transparent outline-none w-full placeholder-gray-500 placeholder:text-sm text-left text-black ml-4">
+          </div>
           
           <div class="hidden md:flex flex-grow md:flex-row gap-4">
-              <a href="/" class="flex-grow-[1] rounded-md text-center p-2 hover:bg-gray-400">Home</a>
-              <a href="/destination" class="flex-grow-[1] rounded-md text-center p-2 hover:bg-gray-400">Destination</a>
-              <a href="/package" class="flex-grow-[1] rounded-md text-center p-2 hover:bg-gray-400">Package</a>
-              <a href="/event" class="flex-grow-[1] rounded-md text-center p-2 hover:bg-gray-400">Event</a>
-              <a href="/about" class="flex-grow-[1] rounded-md text-center p-2 hover:bg-gray-400">About</a>
+              <a href="/" class="flex rounded-md text-center p-2 hover:text-[#7CA4BC] transition-all duration-300  ease-in-out">Home</a>
+              <a href="/destination" class="flex rounded-md text-center p-2 hover:text-[#7CA4BC] transition-all duration-300  ease-in-out">Destination</a>
+              <a href="/package" class="flex rounded-md text-center p-2 hover:text-[#7CA4BC] transition-all duration-300  ease-in-out">Package</a>
+              <a href="/event" class="flex rounded-md text-center p-2 hover:text-[#7CA4BC] transition-all duration-300  ease-in-out">Event</a>
+              <a href="/about" class="flex rounded-md text-center p-2 hover:text-[#7CA4BC] transition-all duration-300  ease-in-out">About</a>
           </div>
 
+          @auth
+              
           <div class="hidden md:flex md:flex-row">
               <div class="ml-4 flex items-center md:ml-6">
                   <button type="button" class="text-gray-300 hover:text-white">
@@ -54,6 +56,13 @@
                   </div>
               </div>
           </div>
+          @else
+          <a href="/register" class="
+            border-2 border-amber-400  text-white font-semibold px-6 py-2 rounded-lg transition-all duration-300  ease-in-out hover:bg-amber-400 hover:text-slate-800">
+            Login
+        </a>
+          
+          @endauth
 
           <div class="md:hidden">
               <div>
@@ -108,6 +117,7 @@
                 <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-100">Settings</a>
                 <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-100">Sign out</a>
               </div>
+
 
           </div>
       </div>
