@@ -10,7 +10,7 @@ class PackageSeeder extends Seeder
     public function run(): void
     {
         Package::create([
-            'name' => 'Tur Candi Borobudur',
+            'name' => 'Tour Candi Borobudur',
             'image' => 'BorobudurPackage.jpg',
             'description' => 'Jelajahi keindahan Candi Borobudur, situs Warisan Dunia UNESCO, dengan tur budaya 2 hari termasuk kunjungan ke candi dan objek wisata sekitar.',
             'price' => 1500000,
@@ -26,7 +26,7 @@ class PackageSeeder extends Seeder
         ]);
 
         Package::create([
-            'name' => 'Tur Matahari Terbit Gunung Bromo',
+            'name' => 'T0ur Gunung Bromo',
             'image' => 'BromoPackage.jpg',
             'description' => 'Ikuti tur 3 hari menjelajahi pemandangan menakjubkan Gunung Bromo, termasuk trekking matahari terbit, perjalanan jeep melintasi pasir vulkanik, dan kunjungan ke kawah.',
             'price' => 2000000,
@@ -34,7 +34,7 @@ class PackageSeeder extends Seeder
         ]);
 
         Package::create([
-            'name' => 'Labuan Bajo Eksotis',
+            'name' => 'Tour Labuan Bajo',
             'image' => 'LabuanBajoPackage.jpg',
             'description' => 'Labuan Bajo, kota pesisir di Pulau Flores, terkenal dengan pemandangan memukau dan sebagai gerbang ke Taman Nasional Komodo, rumah bagi komodo legendaris.',
             'price' => 5000000,
@@ -42,7 +42,7 @@ class PackageSeeder extends Seeder
         ]);
 
         Package::create([
-            'name' => 'Danau Toba Menawan',
+            'name' => 'Tour Danau Toba',
             'image' => 'TobaPackage.jpg',
             'description' => 'Danau Toba di Sumatera Utara adalah danau vulkanik terbesar di dunia, terbentuk dari letusan besar lebih dari 74.000 tahun lalu.',
             'price' => 3250000,
