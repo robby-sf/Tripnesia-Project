@@ -33,14 +33,10 @@ Route::get('/about', function () {
 Route::get('/admin2', function () {
     return view('admin2');
 });
-
-Route::get('/admin', function () {
-    return view('admin', ['title' => 'Dashboard']);
+Route::get('/setting', function () {
+    return view('userSetting');
 });
 
-Route::get('/admin/pesanan', function () {
-    return view('pesanan', ['title' => 'Pesanan']);
-});
 
 
 Route::get('/admin/destination-data', [DestinationController::class, 'data'])->name('Destinations');
@@ -79,6 +75,19 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('/pesanan/{transaction}/update-status', [OrderController::class, 'updateStatus'])->name('pesanan.updateStatus');
     Route::delete('/pesanan/{transaction}', [OrderController::class, 'destroy'])->name('pesanan.destroy');
 });
+
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+});
+Route::get('/admin', function () {
+return view('admin', ['title' => 'Dashboard']);
+});
+
+Route::get('/admin/pesanan', function () {
+return view('pesanan', ['title' => 'Pesanan']);
+});
+
+
+
 
 Route::get('/event', [EventController::class, 'index']);
 Route::get('/event/{slug}', [EventController::class, 'show'])->name('events.show');

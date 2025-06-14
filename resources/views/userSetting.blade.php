@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Settings</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
         body {
@@ -23,34 +23,29 @@
         <h1 class="text-2xl font-light text-gray-700 tracking-wider mb-8">ACCOUNT SETTINGS</h1>
 
         <form action="#" method="POST" class="space-y-6">
-            <!-- First Name -->
             <div>
                 <label for="first-name" class="block text-sm font-medium text-gray-500 mb-1">First name</label>
                 <input type="text" id="first-name" name="first-name" value="Ryan"
                     class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
             </div>
 
-            <!-- Last Name -->
             <div>
                 <label for="last-name" class="block text-sm font-medium text-gray-500 mb-1">Last name</label>
                 <input type="text" id="last-name" name="last-name" value="Gosling"
                     class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
             </div>
 
-            <!-- Username -->
             <div>
                 <label for="username" class="block text-sm font-medium text-gray-500 mb-1">Username</label>
                 <input type="text" id="username" name="username" value="Sebastian"
                     class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
             </div>
 
-            <!-- Password + Toggle -->
             <div class="relative">
                 <label for="password" class="block text-sm font-medium text-gray-500 mb-1">Password</label>
                 <input :type="show ? 'text' : 'password'" id="password" name="password" value="12345678"
                     class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
 
-                <!-- Toggle Eye Icon -->
                 <div class="absolute inset-y-0 right-0 top-7 pr-3 flex items-center cursor-pointer" @click="show = !show">
                     <svg x-show="!show" class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
                         fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,14 +64,12 @@
                 </div>
             </div>
 
-            <!-- Email -->
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-500 mb-1">E-mail</label>
                 <input type="email" id="email" name="email" value="ryan876@gmail.com"
                     class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
             </div>
 
-            <!-- Phone -->
             <div>
                 <label for="phone-number" class="block text-sm font-medium text-gray-500 mb-1">Phone number</label>
                 <input type="tel" id="phone-number" name="phone-number" value="+380990760179"
@@ -86,10 +79,10 @@
             <!-- Buttons -->
             <div class="flex items-center space-x-6 pt-4">
                 <button type="submit"
-                    class="bg-cyan-500 text-white font-semibold py-2.5 px-10 rounded-full hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition-colors">
+                    class="bg-amber-500 text-white font-semibold py-2.5 px-10 rounded-full hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-color duration-300 ">
                     Save
                 </button>
-                <a href="#" class="text-gray-600 hover:text-gray-900 font-medium">Cancel</a>
+                <a href="#" class="text-gray-600 py-2.5 px-10 rounded-full hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-color duration-300 ">Cancel</a>
             </div>
         </form>
     </div>

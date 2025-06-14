@@ -22,6 +22,7 @@ class SignUpController extends Controller
             'nama_belakang' => 'required|string|max:50',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6|confirmed',
+            'role' => 'user'
         ]);
 
         $fullName = $request->nama_depan . ' ' . $request->nama_belakang;
