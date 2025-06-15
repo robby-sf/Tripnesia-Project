@@ -10,17 +10,17 @@ class DestinationController extends Controller
 {
     public function index() {
         $destination = Destination::all();
-        return view('destination',  ['destination' => $destination]); 
+        return view('Destination.destination',  ['destination' => $destination]); 
     }
 
     public function show($slug) {
     $destination = Destination::where('slug', $slug)->firstOrFail();
-    return view('destination-page', ['destination' => $destination]);
+    return view('Destination.destination-page', ['destination' => $destination]);
     }
 
     public function data(){
     $destinations = Destination::all();
-    return view('AdminDestination', [
+    return view('Admin.destination.AdminDestination', [
         'title' => 'Data Destination',
         'destinations' => $destinations
     ]);
@@ -67,7 +67,7 @@ class DestinationController extends Controller
 
     public function edit($id){
         $destination = Destination::findOrFail($id);
-        return view('editDestination',['destination' => $destination]);
+        return view('Admin.destination.editDestination',['destination' => $destination]);
         dd('masuk edit');
     }
 

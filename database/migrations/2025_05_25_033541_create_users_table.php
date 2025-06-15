@@ -16,6 +16,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('role');
+            $table->integer('nomorTelp')->nullable();
+            $table->string('profilePicture')->default('profilekosong.jpg');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

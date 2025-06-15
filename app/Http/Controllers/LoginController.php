@@ -8,28 +8,44 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return view('Login');
+        return view('User.Login');
     }
 
     public function login(Request $request)
-{
-    $request->validate([
-        'email' => ['required', 'email'],
-        'password' => ['required'],
-    ]);
+    {
+        $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+        $remember = $request->has('remember');
 
-    $user = \App\Models\User::where('email', $request->email)->first();
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+            $request->session()->regenerate();
+            
+            $user = Auth::user();
+            
+            session([
+                'user_id' => $user->id,
+                'user_name' => $user->nama,
+                'user_role' => $user->role,
+            ]);
+            
+            return redirect()->intended('/');
+        }
 
-    if (!$user) {
-        return back()->withErrors(['email' => 'Email tidak ditemukan'])->withInput();
+        return back()->withErrors([
+                'email' => 'Email atau password salah.',
+            ])->withInput();
     }
 
-    if (!\Illuminate\Support\Facades\Hash::check($request->password, $user->password)) {
-        return back()->withErrors(['password' => 'Password salah'])->withInput();
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 
-    Auth::login($user);
-    $request->session()->regenerate();
-    return redirect()->intended('/');
-}
 }
