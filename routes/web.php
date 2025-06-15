@@ -33,14 +33,10 @@ Route::get('/about', function () {
 Route::get('/admin2', function () {
     return view('admin2');
 });
-
-Route::get('/admin', function () {
-    return view('admin', ['title' => 'Dashboard']);
+Route::get('/setting', function () {
+    return view('userSetting');
 });
 
-Route::get('/admin/pesanan', function () {
-    return view('pesanan', ['title' => 'Pesanan']);
-});
 
 
 Route::get('/admin/destination-data', [DestinationController::class, 'data'])->name('Destinations');
@@ -80,11 +76,22 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::delete('/pesanan/{transaction}', [OrderController::class, 'destroy'])->name('pesanan.destroy');
 });
 
-Route::get('/event', [EventController::class, 'index'])->name('events.index');
+Route::get('/event', [EventController::class, 'index']);
 Route::get('/event/{slug}', [EventController::class, 'show'])->name('events.show');
 
 // Admin - Tambah Event
 Route::get('/admin/event/create', [EventController::class, 'create'])->name('admin.event.create');
 Route::post('/admin/event', [EventController::class, 'store'])->name('admin.event.store');
+Route::get('/admin', function () {
+return view('admin', ['title' => 'Dashboard']);
+});
+
+Route::get('/admin/pesanan', function () {
+return view('pesanan', ['title' => 'Pesanan']);
+});
+
+
+
+
 
 

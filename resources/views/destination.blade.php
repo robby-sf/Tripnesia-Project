@@ -56,7 +56,7 @@
                         <a :href="'/destination/' + dest.slug"
                             class="max-w-md flex-shrink-0 bg-white rounded-xl shadow-md 
                           transition-transform transform hover:scale-105 duration-300 ease-in-out overflow-hidden">
-                            <img :src="'/storage/' + dest.gambar" class="w-full h-40 object-cover rounded-t-xl" />
+                            <img :src="'/storage/Asset/' + dest.gambar" class="w-full h-40 object-cover rounded-t-xl" />
                             <div class="p-4">
                                 <h4 class="font-bold text-lg" x-text="dest.nama"></h4>
                                 <p class="text-sm text-gray-600 line-clamp-2" x-text="dest.deskripsi"></p>
