@@ -31,7 +31,7 @@
               <div class="relative ml-5">
                   <div>
                       <button @click="open = !open" type="button" class="relative flex items-center rounded-full w-8 h-8 ring-gray-600">
-                          <img class="w-full h-full rounded-full object-cover" src="/Asset/profilekosong.jpg" alt="">
+                          <img src="/storage/Asset/{{ Auth::user()->profilePicture ?? 'profilekosong.jpg' }}" alt="foto profile" class="rounded-full size-8">
                       </button>
 
                       <div 
@@ -43,15 +43,20 @@
                           >
                           <div class="flex items-center px-4 py-1">
                             <div class="shrink-0">
-                            <img src="/Asset/profilekosong.jpg" alt="foto profile" class="rounded-full size-8">
+                                <img src="/Storage/Asset/{{ Auth::user()->profilePicture ?? 'profilekosong.jpg' }}" alt="foto profile" class="rounded-full size-8">
                             </div>
                             <div class="ml-3">
-                                <div class="text-base/4 font-medium text-gray-400">Robby</div>
-                                <div class="text-sm font-medium text-gray-400">Robby@gmail.com</div>
+                                <div class="text-base/4 font-medium text-gray-400">{{ Auth::user()->nama ?? 'Guest Account' }}</div>
+                                <div class="text-sm font-medium text-gray-400">{{ Auth::user()->email ?? 'guest@gmail.com' }}</div>
                             </div>
                           </div>
-                          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-                          <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+                          <a href="{{ route('account.settings') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                          <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                Sign out
+                            </button>
+                        </form>
                       </div>
                   </div>
               </div>
@@ -95,13 +100,13 @@
 
               <div class="border-t border-gray-600 pt-4 pb-3">
                 <div class="flex items-center px-4">
-                  <div class="shrink-0">
-                    <img src="/Asset/profilekosong.jpg" alt="foto profile" class="rounded-full size-10">
-                  </div>
-                  <div class="ml-3">
-                     <div class="text-base/5 font-medium text-white">Robby</div>
-                     <div class="text-sm font-medium text-gray-400">Robby@gmail.com</div>
-                  </div>
+                    <div class="shrink-0">
+                        <img src="/storage/Asset/{{ Auth::user()->profilePicture ?? 'profilekosong.jpg' }}" alt="foto profile" class="rounded-full size-8">
+                    </div>
+                    <div class="ml-3">
+                        <div class="text-base/4 font-medium text-gray-400">{{ Auth::user()->nama ?? 'Guest Account' }}</div>
+                        <div class="text-sm font-medium text-gray-400">{{ Auth::user()->email ?? 'guest@gmail.com'  }}</div>
+                    </div>
                   <div class="ml-auto flex items-center md:ml-6">
                     <button type="button" class="text-gray-300 hover:text-white">
                         <svg class="size-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
@@ -113,9 +118,13 @@
               </div>
 
               <div class="space-y-1 mt-4 mb-3">
-                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-100">Profile</a>
                 <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-100">Settings</a>
-                <a href="#" class="block px-4 py-2 text-sm text-white hover:bg-gray-100">Sign out</a>
+                <form method="POST" action="{{ route('logout') }}">
+                      @csrf
+                      <button type="submit" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                          Sign out
+                      </button>
+                </form>
               </div>
 
 

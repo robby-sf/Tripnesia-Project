@@ -22,28 +22,38 @@
     <div class="bg-white p-8 md:p-12 rounded-lg shadow-sm w-full max-w-2xl" x-data="{ show: false }">
         <h1 class="text-2xl font-light text-gray-700 tracking-wider mb-8">ACCOUNT SETTINGS</h1>
 
-        <form action="#" method="POST" class="space-y-6">
-            <div>
-                <label for="first-name" class="block text-sm font-medium text-gray-500 mb-1">First name</label>
-                <input type="text" id="first-name" name="first-name" value="Ryan"
-                    class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
+        <form action="{{ route('account.update') }}" method="POST" class="space-y-6" enctype="multipart/form-data">
+            @csrf
+
+            <div class="flex items-center space-x-6">
+                <div class="relative">
+                    <img src="{{ asset('storage/Asset/' . ($user->profilePicture ?? 'profilekosong.jpg')) }}" alt="Profile Picture" class="size-20 rounded-full object-cover ring-2 ring-offset-2 ring-gray-300">
+                    {{-- <span class="absolute bottom-0 right-0 block h-5 w-5 rounded-full bg-green-500 border-2 border-white"></span> --}}
+                </div>
+
+                <div class="flex flex-col space-y-2">
+                    <div>
+                        <label for="profilePicture" class="cursor-pointer rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-800 hover:text-gray-300 transition-colors duration-200">
+                            Ubah Foto
+                        </label>
+                        <input type="file" id="profilePicture" name="profilePicture" accept="image/*" class="sr-only">
+                    </div>
+                    <button type="submit" name="hapus_foto" value="1"
+                        class="text-sm font-semibold text-red-500 hover:text-red-300 transition-colors duration-200 mt-2">
+                        Hapus Foto
+                    </button>
+                </div>
             </div>
 
             <div>
-                <label for="last-name" class="block text-sm font-medium text-gray-500 mb-1">Last name</label>
-                <input type="text" id="last-name" name="last-name" value="Gosling"
-                    class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
-            </div>
-
-            <div>
-                <label for="username" class="block text-sm font-medium text-gray-500 mb-1">Username</label>
-                <input type="text" id="username" name="username" value="Sebastian"
+                <label for="nama" class="block text-sm font-medium text-gray-500 mb-1">Username</label>
+                <input type="text" id="username" name="nama" value="{{ old('nama',$user->nama) }}"
                     class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
             </div>
 
             <div class="relative">
                 <label for="password" class="block text-sm font-medium text-gray-500 mb-1">Password</label>
-                <input :type="show ? 'text' : 'password'" id="password" name="password" value="12345678"
+                <input :type="show ? 'text' : 'password'" id="password" name="password" value=""
                     class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
 
                 <div class="absolute inset-y-0 right-0 top-7 pr-3 flex items-center cursor-pointer" @click="show = !show">
@@ -66,13 +76,13 @@
 
             <div>
                 <label for="email" class="block text-sm font-medium text-gray-500 mb-1">E-mail</label>
-                <input type="email" id="email" name="email" value="ryan876@gmail.com"
+                <input type="email" id="email" name="email" value="{{ old('email',$user->email) }}"
                     class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
             </div>
 
             <div>
-                <label for="phone-number" class="block text-sm font-medium text-gray-500 mb-1">Phone number</label>
-                <input type="tel" id="phone-number" name="phone-number" value="+380990760179"
+                <label for="nomorTelp" class="block text-sm font-medium text-gray-500 mb-1">Phone number</label>
+                <input type="tel" id="nomorTelp" name="nomorTelp" value="{{ old('nomorTelp',$user->nomorTelp) }}"
                     class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
             </div>
 
@@ -82,7 +92,7 @@
                     class="bg-amber-500 text-white font-semibold py-2.5 px-10 rounded-full hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-color duration-300 ">
                     Save
                 </button>
-                <a href="#" class="text-gray-600 py-2.5 px-10 rounded-full hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-color duration-300 ">Cancel</a>
+                <a href="/" class="text-gray-600 py-2.5 px-10 rounded-full hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-color duration-300 ">Back</a>
             </div>
         </form>
     </div>

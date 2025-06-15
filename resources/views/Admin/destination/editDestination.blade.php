@@ -35,7 +35,7 @@
     @if($destination->gambar)
   <div class="mt-2">
     <p class="text-sm text-gray-600 mb-1">Gambar saat ini:</p>
-    <img src="{{ asset('storage/' . $destination->gambar) }}" alt="Gambar Saat Ini" class="w-48 rounded shadow">
+    <img src="{{ asset('storage/Asset/' . $destination->gambar) }}" alt="Gambar Saat Ini" class="w-48 rounded shadow">
   </div>
 @endif
   </div>
