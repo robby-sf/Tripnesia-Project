@@ -41,11 +41,11 @@ Route::get('/setting', function () {
 
 Route::get('/admin/destination-data', [DestinationController::class, 'data'])->name('Destinations');
 
-Route::get('/admin/destination/create',[DestinationController::class,'create'])->name('create');
-Route::post('/admin/destination/create',[DestinationController::class,'store'])->name('store');
+Route::get('/admin/destination/create', [DestinationController::class, 'create'])->name('create');
+Route::post('/admin/destination/create', [DestinationController::class, 'store'])->name('store');
 
-Route::get('/admin/destination/{id}/edit',[DestinationController::class, 'edit'])->name('edit');
-Route::put('/admin/destination/{id}',[DestinationController::class, 'update'])->name('update');
+Route::get('/admin/destination/{id}/edit', [DestinationController::class, 'edit'])->name('edit');
+Route::put('/admin/destination/{id}', [DestinationController::class, 'update'])->name('update');
 
 Route::delete('/admin/destination/{id}', [DestinationController::class, 'delete'])->name('destination.delete');
 
@@ -74,18 +74,14 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/pesanan/{transaction}', [OrderController::class, 'show'])->name('pesanan.show');
     Route::post('/pesanan/{transaction}/update-status', [OrderController::class, 'updateStatus'])->name('pesanan.updateStatus');
     Route::delete('/pesanan/{transaction}', [OrderController::class, 'destroy'])->name('pesanan.destroy');
+    Route::post('/pesanan/{transaction}/confirm', [OrderController::class, 'confirmOrder'])->name('pesanan.confirm');
+    Route::post('/pesanan/{transaction}/refund', [OrderController::class, 'processRefund'])->name('pesanan.refund');
 });
 
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-});
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {});
 Route::get('/admin', function () {
-return view('admin', ['title' => 'Dashboard']);
+    return view('admin', ['title' => 'Dashboard']);
 });
-
-Route::get('/admin/pesanan', function () {
-return view('pesanan', ['title' => 'Pesanan']);
-});
-
 
 
 
@@ -95,5 +91,3 @@ Route::get('/event/{slug}', [EventController::class, 'show'])->name('events.show
 // Admin - Tambah Event
 Route::get('/admin/event/create', [EventController::class, 'create'])->name('admin.event.create');
 Route::post('/admin/event', [EventController::class, 'store'])->name('admin.event.store');
-
-

@@ -80,18 +80,29 @@
                                         {{ $transaction->package->name ?? 'N/A' }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Rp
                                         {{ number_format($transaction->total_amount, 0, ',', '.') }}</td>
+                                    {{-- File: resources/views/pesanan.blade.php (atau admin/orders/index.blade.php) --}}
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @php
-                                            $statusClass = 'bg-gray-100 text-gray-800'; // Default
+                                            $statusClass = 'bg-gray-100 text-gray-800';
                                             $statusText = ucfirst($transaction->payment_status);
                                             switch (strtolower($transaction->payment_status)) {
                                                 case 'success':
                                                 case 'settlement':
+                                                    $statusClass = 'bg-yellow-100 text-yellow-800';
+                                                    $statusText = 'Perlu Dikonfirmasi'; // Status lebih deskriptif untuk admin
+                                                    break;
+                                                case 'confirmed': // Status baru
                                                     $statusClass = 'bg-green-100 text-green-800';
+                                                    $statusText = 'Terkonfirmasi';
+                                                    break;
+                                                case 'refunded': // Status baru
+                                                    $statusClass = 'bg-gray-500 text-white';
+                                                    $statusText = 'Direfund';
                                                     break;
                                                 case 'pending':
                                                 case 'challenge':
-                                                    $statusClass = 'bg-yellow-100 text-yellow-800';
+                                                    $statusClass = 'bg-blue-100 text-blue-800';
+                                                    $statusText = 'Menunggu Pembayaran';
                                                     break;
                                                 case 'failed':
                                                 case 'expire':

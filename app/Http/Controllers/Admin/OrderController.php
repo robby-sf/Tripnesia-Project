@@ -6,18 +6,24 @@ use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth; // Import Auth untuk tipe data yang lebih jelas
 use Illuminate\Validation\Rule;
+use Midtrans\Transaction as MidtransTransaction;
 
 class OrderController extends Controller
 {
+    /**
+     * Constructor
+     */
     public function __construct()
     {
-        // Contoh proteksi dengan middleware, pastikan Anda punya middleware 'is_admin'
-        // atau sesuaikan dengan sistem autentikasi dan otorisasi Anda.
-        // $this->middleware('auth');
-        // $this->middleware('is_admin'); // Anda perlu membuat middleware ini jika belum ada
+        // Pastikan Anda menerapkan middleware yang sesuai di sini atau di file rute
+        // $this->middleware(['auth', 'is_admin']);
     }
 
+    /**
+     * Menampilkan daftar semua pesanan.
+     */
     public function index()
     {
         $transactions = Transaction::with(['user', 'package'])
@@ -30,6 +36,9 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * Menampilkan detail satu pesanan.
+     */
     public function show(Transaction $transaction)
     {
         $transaction->load(['user', 'package']);
@@ -37,15 +46,14 @@ class OrderController extends Controller
             'pending' => 'Pending',
             'success' => 'Success',
             'settlement' => 'Settlement',
-            'capture' => 'Capture',
-            'challenge' => 'Challenge',
+            'confirmed' => 'Confirmed',
+            'completed' => 'Completed',
             'failed' => 'Failed',
-            'deny' => 'Deny',
-            'cancel' => 'Cancel (Midtrans)',
-            'cancelled' => 'Cancelled (Manual)',
+            'cancelled' => 'Cancelled',
             'expire' => 'Expire',
-            'refund' => 'Refund'
+            'refunded' => 'Refunded',
         ];
+
         return view('show', [
             'title' => 'Detail Pesanan: ' . $transaction->order_id,
             'transaction' => $transaction,
@@ -53,20 +61,98 @@ class OrderController extends Controller
         ]);
     }
 
+    /**
+     * Mengkonfirmasi ketersediaan pesanan.
+     */
+    public function confirmOrder(Transaction $transaction)
+    {
+        if (!in_array($transaction->payment_status, ['success', 'settlement'])) {
+            return redirect()->route('admin.pesanan.show', $transaction->id)
+                ->with('error', 'Hanya pesanan yang sudah berhasil dibayar yang dapat dikonfirmasi.');
+        }
+
+        $transaction->payment_status = 'confirmed';
+        // PERBAIKAN: Menggunakan Auth::id() atau optional() untuk keamanan tipe data
+        $adminId = Auth::id() ?? 'System';
+        $transaction->admin_notes = ($transaction->admin_notes ? $transaction->admin_notes . "\n" : "")
+            . "Pesanan dikonfirmasi oleh Admin (ID: {$adminId}) pada " . now()->toDateTimeString();
+        $transaction->save();
+
+        return redirect()->route('admin.pesanan.show', $transaction->id)
+            ->with('success', 'Pesanan berhasil dikonfirmasi.');
+    }
+
+    /**
+     * Memproses permintaan refund melalui API Midtrans.
+     */
+    public function processRefund(Request $request, Transaction $transaction)
+    {
+        $request->validate(['reason' => 'required|string|max:255']);
+
+        if (!in_array($transaction->payment_status, ['success', 'settlement'])) {
+            return redirect()->route('admin.pesanan.show', $transaction->id)
+                ->with('error', 'Hanya pesanan yang sudah berhasil dibayar yang dapat di-refund.');
+        }
+
+        $orderId = $transaction->order_id;
+        $params = ['reason' => $request->input('reason')];
+
+        try {
+            // PERBAIKAN: Menambahkan komentar @var untuk membantu linter
+            /** @var object $response */
+            $response = MidtransTransaction::refund($orderId, $params);
+
+            // PERBAIKAN: Menggunakan property_exists untuk pengecekan yang lebih aman sebelum mengakses properti
+            if (property_exists($response, 'status_code') && $response->status_code == '200' && property_exists($response, 'transaction_status') && in_array($response->transaction_status, ['refund', 'partial_refund'])) {
+                $transaction->payment_status = 'refunded';
+                $adminId = Auth::id() ?? 'System';
+                $transaction->admin_notes = ($transaction->admin_notes ? $transaction->admin_notes . "\n" : "")
+                    . "Refund diproses oleh Admin (ID: {$adminId}) pada " . now()->toDateTimeString() . " dengan alasan: " . $request->input('reason');
+                $transaction->save();
+
+                return redirect()->route('admin.pesanan.show', $transaction->id)
+                    ->with('success', 'Refund berhasil diproses melalui Midtrans.');
+            } else {
+                $errorMessage = property_exists($response, 'status_message') ? $response->status_message : 'Status tidak diketahui.';
+                return redirect()->route('admin.pesanan.show', $transaction->id)
+                    ->with('error', 'Midtrans gagal memproses refund. Pesan: ' . $errorMessage);
+            }
+        } catch (\Exception $e) {
+            Log::error("Midtrans Refund API failed for order (ID: {$orderId}): " . $e->getMessage());
+            return redirect()->route('admin.pesanan.show', $transaction->id)
+                ->with('error', 'Terjadi kesalahan saat menghubungi API Midtrans: ' . $e->getMessage());
+        }
+    }
+
+    /**
+     * Menghapus pesanan (Soft Delete).
+     */
+    public function destroy(Transaction $transaction)
+    {
+        $orderId = $transaction->order_id;
+        $transaction->delete();
+        $adminId = Auth::id() ?? 'System';
+        Log::info("Admin (ID: {$adminId}) deleted order (ID: {$orderId}).");
+
+        return redirect()->route('admin.pesanan.index')
+            ->with('success', "Pesanan dengan ID {$orderId} berhasil dihapus (soft delete).");
+    }
+
+    /**
+     * Mengupdate status pembayaran pesanan secara manual.
+     */
     public function updateStatus(Request $request, Transaction $transaction)
     {
         $allowedStatuses = [
             'pending',
             'success',
             'settlement',
-            'capture',
-            'challenge',
+            'confirmed',
+            'completed',
             'failed',
-            'deny',
-            'cancel',
             'cancelled',
             'expire',
-            'refund'
+            'refunded'
         ];
         $request->validate([
             'payment_status' => ['required', Rule::in($allowedStatuses)],
@@ -75,26 +161,18 @@ class OrderController extends Controller
 
         $oldStatus = $transaction->payment_status;
         $transaction->payment_status = $request->input('payment_status');
+
         if ($request->filled('admin_notes')) {
             $currentAdminNotes = $transaction->admin_notes ? $transaction->admin_notes . "\n" : "";
-            $transaction->admin_notes = $currentAdminNotes . "Update by Admin (" . now()->toDateTimeString() . "): " . $request->input('admin_notes');
+            $adminId = Auth::id() ?? 'System';
+            $transaction->admin_notes = $currentAdminNotes . "Update status manual oleh Admin (ID: {$adminId}) pada " . now()->toDateTimeString() . ": " . $request->input('admin_notes');
         }
         $transaction->save();
 
-        Log::info("Admin (ID: " . (auth()->id() ?? 'System') . ") updated order (ID: {$transaction->order_id}) status from '{$oldStatus}' to '{$transaction->payment_status}'.");
+        $adminIdForLog = Auth::id() ?? 'System';
+        Log::info("Admin (ID: {$adminIdForLog}) manually updated order (ID: {$transaction->order_id}) status from '{$oldStatus}' to '{$transaction->payment_status}'.");
 
         return redirect()->route('admin.pesanan.show', $transaction->id)
-            ->with('success', 'Status pesanan berhasil diperbarui.');
-    }
-
-    public function destroy(Transaction $transaction)
-    {
-        $orderId = $transaction->order_id;
-        $transaction->delete(); // Melakukan soft delete
-
-        Log::info("Admin (ID: " . (auth()->id() ?? 'System') . ") deleted order (ID: {$orderId}).");
-
-        return redirect()->route('admin.pesanan.index')
-            ->with('success', "Pesanan dengan ID {$orderId} berhasil dihapus (soft delete).");
+            ->with('success', 'Status pesanan berhasil diperbarui secara manual.');
     }
 }
