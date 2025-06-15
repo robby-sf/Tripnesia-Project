@@ -10,19 +10,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Auth\Events\Login;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('index');
 })->name('home');
-
-Route::get('/Page', function () {
-    return view('Page');
-});
-
-Route::get('/destination', function () {
-    return view('destination');
-});
-
 
 Route::get('/package', [PackageController::class, 'index']);
 
@@ -62,9 +54,13 @@ Route::post('/register', [SignUpController::class, 'register'])->name('register'
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 Route::middleware('auth')->group(function () {
     Route::get('/checkout/{id}', [CheckoutController::class, 'show'])->name('checkout.show');
     Route::post('/checkout/process/{id}', [CheckoutController::class, 'process'])->name('checkout.process');
+    Route::get('/account/settings', [UserController::class, 'setting'])->name('account.settings');
+    Route::post('/account/settings', [UserController::class, 'update'])->name('account.update');
 });
 
 Route::post('/midtrans/notification', [CheckoutController::class, 'notificationHandler'])->name('midtrans.notification');
@@ -78,16 +74,16 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('/pesanan/{transaction}/refund', [OrderController::class, 'processRefund'])->name('pesanan.refund');
 });
 
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {});
-Route::get('/admin', function () {
-    return view('admin', ['title' => 'Dashboard']);
-});
-
-
-
 Route::get('/event', [EventController::class, 'index']);
 Route::get('/event/{slug}', [EventController::class, 'show'])->name('events.show');
 
 // Admin - Tambah Event
 Route::get('/admin/event/create', [EventController::class, 'create'])->name('admin.event.create');
 Route::post('/admin/event', [EventController::class, 'store'])->name('admin.event.store');
+Route::get('/admin', function () {
+    return view('Admin.admin', ['title' => 'Dashboard']);
+});
+
+Route::get('/admin/pesanan', function () {
+    return view('pesanan', ['title' => 'Pesanan']);
+});

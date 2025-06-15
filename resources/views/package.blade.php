@@ -28,23 +28,18 @@
             background-color: #4a5568;
         }
 
-        .navbar {
-            position: fixed;
-            z-index: 10;
-            width: 100%;
-            top: 0;
-            left: 0;
-        }
-
         .content-container {
             margin-top: 100px;
         }
     </style>
+    
+  <style>[x-cloak] { display: none; }</style>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body>
     <!-- Navbar -->
-    <x-Navbar class="navbar"></x-Navbar>
+    <x-Navbar></x-Navbar>
 
     <div class="container mx-auto py-8 content-container">
         <h1 class="text-4xl font-bold text-center text-gray-800 mb-12">Our Travel Packages</h1>
