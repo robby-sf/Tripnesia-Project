@@ -80,7 +80,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::delete('/pesanan/{transaction}', [OrderController::class, 'destroy'])->name('pesanan.destroy');
 });
 
-Route::get('/event', [EventController::class, 'index']);
+Route::get('/event', [EventController::class, 'index'])->name('events.index');
 Route::get('/event/{slug}', [EventController::class, 'show'])->name('events.show');
 
 // Admin - Tambah Event
