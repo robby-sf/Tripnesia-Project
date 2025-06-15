@@ -72,8 +72,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::delete('/pesanan/{transaction}', [OrderController::class, 'destroy'])->name('pesanan.destroy');
 });
 
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-});
+Route::get('/event', [EventController::class, 'index']);
+Route::get('/event/{slug}', [EventController::class, 'show'])->name('events.show');
+
+// Admin - Tambah Event
+Route::get('/admin/event/create', [EventController::class, 'create'])->name('admin.event.create');
+Route::post('/admin/event', [EventController::class, 'store'])->name('admin.event.store');
 Route::get('/admin', function () {
 return view('Admin.admin', ['title' => 'Dashboard']);
 });
@@ -85,11 +89,5 @@ return view('pesanan', ['title' => 'Pesanan']);
 
 
 
-Route::get('/event', [EventController::class, 'index']);
-Route::get('/event/{slug}', [EventController::class, 'show'])->name('events.show');
-
-// Admin - Tambah Event
-Route::get('/admin/event/create', [EventController::class, 'create'])->name('admin.event.create');
-Route::post('/admin/event', [EventController::class, 'store'])->name('admin.event.store');
 
 
