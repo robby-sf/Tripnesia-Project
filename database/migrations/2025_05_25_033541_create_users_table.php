@@ -6,10 +6,10 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    
+
     public function up(): void
     {
-         info('>> MIGRASI USERS DIJALANKAN');
+        info('>> MIGRASI USERS DIJALANKAN');
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('nama');

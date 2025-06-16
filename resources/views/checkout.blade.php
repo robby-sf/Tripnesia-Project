@@ -122,8 +122,7 @@
 
                 <div class="mb-6">
                     <label for="email" class="block text-gray-700 font-medium mb-1 text-sm">Email</label>
-                    <input type="email" id="email" name="email"
-                        value="{{ $user->email ?? 'email@example.com' }}"
+                    <input type="email" id="email" value="{{ $user->email ?? 'email@example.com' }}"
                         class="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         readonly>
                 </div>
@@ -177,42 +176,56 @@
                     if (data.snap_token) {
                         window.snap.pay(data.snap_token, {
                             onSuccess: function(result) {
-                                alert("Pembayaran berhasil! Anda akan diarahkan ke halaman utama.");
-                                window.location.href = "{{ route('home') }}";
+                                // Buat URL untuk update status di backend menggunakan helper route() Laravel
+                                let updateStatusUrl =
+                                    "{{ route('checkout.updateStatusOnSuccess', ['order_id' => 'ORDER_ID_PLACEHOLDER']) }}";
+                                updateStatusUrl = updateStatusUrl.replace('ORDER_ID_PLACEHOLDER',
+                                    result.order_id);
+
+                                // Kirim request ke backend untuk update status jadi 'awaiting_confirmation'
+                                fetch(updateStatusUrl, {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': document.querySelector(
+                                            'meta[name="csrf-token"]').getAttribute(
+                                            'content')
+                                    }
+                                }).finally(() => {
+                                    // Setelah mencoba update status (baik berhasil atau gagal),
+                                    // tampilkan alert dan arahkan ke halaman utama.
+                                    alert(
+                                        "Pembayaran berhasil! Pesanan Anda sedang menunggu konfirmasi dari admin. Anda akan diarahkan ke halaman utama."
+                                        );
+                                    window.location.href = "{{ route('home') }}";
+                                });
                             },
                             onPending: function(result) {
                                 alert(
-                                    "Pembayaran Anda sedang diproses. Anda akan diarahkan ke halaman utama. Silakan periksa email atau aplikasi pembayaran Anda untuk instruksi lebih lanjut."
-                                );
+                                    "Pembayaran Anda sedang diproses. Silakan selesaikan pembayaran. Anda akan diarahkan ke halaman utama."
+                                    );
                                 window.location.href = "{{ route('home') }}";
                             },
                             onError: function(result) {
-                                alert(
-                                    "Pembayaran gagal atau terjadi kesalahan. Silakan coba lagi nanti. Anda akan diarahkan ke halaman utama."
-                                );
+                                alert("Pembayaran gagal. Anda akan diarahkan ke halaman utama.");
                                 window.location.href = "{{ route('home') }}";
                             },
                             onClose: function() {
                                 payButton.disabled = false;
                                 payButton.innerText = 'Lanjutkan ke Pembayaran';
                                 messageContainer.innerHTML =
-                                    `<div class="info-message">Anda menutup jendela pembayaran. Silakan klik 'Lanjutkan ke Pembayaran' jika ingin mencoba lagi.</div>`;
+                                    `<div class="info-message">Anda menutup jendela pembayaran.</div>`;
                             }
                         });
                     } else if (data.error) {
                         messageContainer.innerHTML = `<div class="error-message">${data.error}</div>`;
                         payButton.disabled = false;
                         payButton.innerText = 'Lanjutkan ke Pembayaran';
-                    } else {
-                        messageContainer.innerHTML =
-                            `<div class="error-message">Terjadi kesalahan yang tidak diketahui saat mengambil data pembayaran. Silakan coba lagi.</div>`;
-                        payButton.disabled = false;
-                        payButton.innerText = 'Lanjutkan ke Pembayaran';
                     }
                 })
                 .catch(error => {
                     let displayError =
-                        'Tidak dapat terhubung ke server pembayaran. Periksa koneksi internet Anda dan coba lagi.';
+                        'Tidak dapat terhubung ke server pembayaran. Periksa koneksi internet Anda.';
                     if (error.status && error.data && error.data.error) {
                         displayError = `Error ${error.status}: ${error.data.error}`;
                     } else if (error.message) {

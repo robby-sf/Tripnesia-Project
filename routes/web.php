@@ -33,11 +33,11 @@ Route::get('/setting', function () {
 
 Route::get('/admin/destination-data', [DestinationController::class, 'data'])->name('Destinations');
 
-Route::get('/admin/destination/create',[DestinationController::class,'create'])->name('create');
-Route::post('/admin/destination/create',[DestinationController::class,'store'])->name('store');
+Route::get('/admin/destination/create', [DestinationController::class, 'create'])->name('create');
+Route::post('/admin/destination/create', [DestinationController::class, 'store'])->name('store');
 
-Route::get('/admin/destination/{id}/edit',[DestinationController::class, 'edit'])->name('edit');
-Route::put('/admin/destination/{id}',[DestinationController::class, 'update'])->name('update');
+Route::get('/admin/destination/{id}/edit', [DestinationController::class, 'edit'])->name('edit');
+Route::put('/admin/destination/{id}', [DestinationController::class, 'update'])->name('update');
 
 Route::delete('/admin/destination/{id}', [DestinationController::class, 'delete'])->name('destination.delete');
 
@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout/process/{id}', [CheckoutController::class, 'process'])->name('checkout.process');
     Route::get('/account/settings', [UserController::class, 'setting'])->name('account.settings');
     Route::post('/account/settings', [UserController::class, 'update'])->name('account.update');
+    Route::post('/checkout/update-status-success/{order_id}', [CheckoutController::class, 'updateStatusOnSuccess'])->name('checkout.updateStatusOnSuccess');
 });
 
 Route::post('/midtrans/notification', [CheckoutController::class, 'notificationHandler'])->name('midtrans.notification');
@@ -79,17 +80,19 @@ Route::get('/event/{slug}', [EventController::class, 'show'])->name('events.show
 Route::get('/admin/event/create', [EventController::class, 'create'])->name('admin.event.create');
 Route::post('/admin/event', [EventController::class, 'store'])->name('admin.event.store');
 Route::get('/admin', function () {
-return view('Admin.admin', ['title' => 'Dashboard']);
+    return view('Admin.admin', ['title' => 'Dashboard']);
 });
+Route::get('/admin/event', [EventController::class, 'adminIndex'])->name('admin.event.index');
+Route::get('/admin/event/{id}/edit', [EventController::class, 'edit'])->name('admin.event.edit');
+Route::put('/admin/event/{id}', [EventController::class, 'update'])->name('admin.event.update');
+Route::delete('/admin/event/{id}', [EventController::class, 'destroy'])->name('admin.event.destroy');
 
 Route::get('/admin/pesanan', function () {
 return view('pesanan', ['title' => 'Pesanan']);
 });
 
-Route::get('/admin/event', [EventController::class, 'adminIndex'])->name('admin.event.index');
-Route::get('/admin/event/{id}/edit', [EventController::class, 'edit'])->name('admin.event.edit');
-Route::put('/admin/event/{id}', [EventController::class, 'update'])->name('admin.event.update');
-Route::delete('/admin/event/{id}', [EventController::class, 'destroy'])->name('admin.event.destroy');
+
+
 
 
 

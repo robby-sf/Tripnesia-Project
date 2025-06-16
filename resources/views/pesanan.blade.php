@@ -1,4 +1,3 @@
-{{-- File: resources/views/pesanan.blade.php --}}
 <!doctype html>
 <html class="h-full bg-gray-100">
 
@@ -6,29 +5,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" type="image/png" href="{{ asset('Asset/icon Web.png') }}"> {{-- Sesuaikan path jika perlu --}}
+    <link rel="icon" type="image/png" href="{{ asset('Asset/icon Web.png') }}">
     @vite('resources/css/app.css')
     <title>{{ $title ?? 'Daftar Pesanan' }} - Tripnesia</title>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        [x-cloak] {
-            display: none;
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 9999px;
+            line-height: 1.25;
+        }
+
+        .status-awaiting {
+            background-color: #fef9c3;
+            color: #854d0e;
+        }
+
+        .status-success {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .status-completed {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-pending {
+            background-color: #e0e7ff;
+            color: #4338ca;
+        }
+
+        .status-failed {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-refunded {
+            background-color: #e5e7eb;
+            color: #374151;
         }
     </style>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="flex flex-col min-h-screen">
-    {{-- Menggunakan komponen Blade Anda yang sudah ada --}}
-    <x-admin-navbar></x-admin-navbar>
+<body class="flex flex-col min-h-screen font-sans">
+    @if (View::exists('components.admin-navbar'))
+        <x-admin-navbar></x-admin-navbar>
+    @endif
 
     <div class="flex flex-1">
-        <x-admin-side-bar class="w-64"></x-admin-side-bar> {{-- Pastikan class w-64 atau yang sesuai ada --}}
+        @if (View::exists('components.admin-side-bar'))
+            <x-admin-side-bar class="w-64"></x-admin-side-bar>
+        @endif
 
         <main class="flex-1 p-6 md:p-8 overflow-x-auto">
-            <x-admin-header>
-                {{ $title ?? 'Daftar Pesanan' }}
-            </x-admin-header>
+            @if (View::exists('components.admin-header'))
+                <x-admin-header>
+                    {{ $title ?? 'Daftar Pesanan' }}
+                </x-admin-header>
+            @endif
 
             @if (session('success'))
                 <div class="mb-4 p-4 bg-green-100 text-green-700 border border-green-300 rounded-md text-sm">
@@ -82,22 +121,34 @@
                                         {{ number_format($transaction->total_amount, 0, ',', '.') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @php
-                                            $statusClass = 'bg-gray-100 text-gray-800'; // Default
-                                            $statusText = ucfirst($transaction->payment_status);
+                                            $statusClass = 'status-refunded'; // Default
+                                            $statusText = ucfirst(str_replace('_', ' ', $transaction->payment_status));
+
                                             switch (strtolower($transaction->payment_status)) {
-                                                case 'success':
+                                                case 'awaiting_confirmation':
                                                 case 'settlement':
-                                                    $statusClass = 'bg-green-100 text-green-800';
+                                                    $statusClass = 'status-awaiting';
+                                                    $statusText = 'Perlu Dikonfirmasi';
+                                                    break;
+                                                case 'success':
+                                                case 'confirmed':
+                                                    $statusClass = 'status-success';
+                                                    $statusText = 'Sukses (Tersedia)';
+                                                    break;
+                                                case 'completed':
+                                                    $statusClass = 'status-success';
+                                                    $statusText = 'Selesai';
                                                     break;
                                                 case 'pending':
                                                 case 'challenge':
-                                                    $statusClass = 'bg-yellow-100 text-yellow-800';
+                                                    $statusClass = 'status-pending';
+                                                    $statusText = 'Menunggu Pembayaran';
                                                     break;
                                                 case 'failed':
                                                 case 'expire':
                                                 case 'cancelled':
                                                 case 'deny':
-                                                    $statusClass = 'bg-red-100 text-red-800';
+                                                    $statusClass = 'status-failed';
                                                     break;
                                             }
                                         @endphp
@@ -109,9 +160,8 @@
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{ $transaction->created_at->format('d M Y H:i') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                                        {{-- Pastikan nama rute 'admin.pesanan.show' dan 'admin.pesanan.destroy' sudah benar --}}
                                         <a href="{{ route('admin.pesanan.show', $transaction->id) }}"
-                                            class="text-indigo-600 hover:text-indigo-900">Detail</a>
+                                            class="text-blue-600 hover:text-blue-900">Detail</a>
                                         <form action="{{ route('admin.pesanan.destroy', $transaction->id) }}"
                                             method="POST" class="inline-block"
                                             onsubmit="return confirm('Apakah Anda yakin ingin menghapus pesanan {{ $transaction->order_id }} ini?');">
