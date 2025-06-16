@@ -194,7 +194,6 @@
                 </div>
 
                 <div class="space-y-8">
-                    {{-- ================== BAGIAN YANG DIPERBARUI ================== --}}
                     <div class="card" x-data="{ selectedStatus: '{{ old('payment_status', '') }}' }">
                         <h3 class="text-lg font-semibold text-gray-900 mb-4">Update Status</h3>
 
@@ -244,7 +243,6 @@
                             </div>
                         </form>
                     </div>
-                    {{-- ========================================================== --}}
                 </div>
             </div>
         </main>
