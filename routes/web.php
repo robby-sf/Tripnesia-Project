@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Auth\Events\Login;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('index');
@@ -53,6 +54,8 @@ Route::post('/register', [SignUpController::class, 'register'])->name('register'
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+Route::get('/login/admin', [AdminController::class, 'showloginForm'])->name('adminLogin');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 

@@ -33,7 +33,7 @@ class SignUpController extends Controller
             'role' => 'user'
         ]);
 
-        Auth::login($user);
+        Auth::guard('web')->login($user);
 
         return redirect('/');
     }

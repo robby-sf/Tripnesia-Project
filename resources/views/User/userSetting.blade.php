@@ -36,7 +36,7 @@
                         <label for="profilePicture" class="cursor-pointer rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-800 hover:text-gray-300 transition-colors duration-200">
                             Ubah Foto
                         </label>
-                        <input type="file" id="profilePicture" name="profilePicture" accept="image/*" class="sr-only">
+                        <input type="file" name="profilePicture">
                     </div>
                     <button type="submit" name="hapus_foto" value="1"
                         class="text-sm font-semibold text-red-500 hover:text-red-300 transition-colors duration-200 mt-2">

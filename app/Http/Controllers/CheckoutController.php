@@ -25,13 +25,13 @@ class CheckoutController extends Controller
     public function show($id)
     {
         $package = Package::findOrFail($id);
-        $user = Auth::user();
+        $user = Auth::guard('web')->user();
         return view('checkout', compact('package', 'user'));
     }
 
     public function process(Request $request, $id)
     {
-        $user = Auth::user();
+        $user = Auth::guard('web')->user();
         $package = Package::findOrFail($id);
 
         $orderId = 'TRX-' . time() . '-' . Str::upper(Str::random(5)) . '-' . $package->id;

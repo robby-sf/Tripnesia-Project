@@ -5,18 +5,19 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\log;
 
 class UserController extends Controller
 {
     public function setting()
     {
-        return view('User.userSetting')->with('user', Auth::user());
+        return view('User.userSetting')->with('user', Auth::guard('web')->user());
     }
 
     public function update(Request $request)
     {
         /** @var \App\Models\User $user */
-        $user = Auth::user();
+        $user = Auth::guard('web')->user();
 
         // Validasi data
         $validated = $request->validate([
@@ -24,7 +25,7 @@ class UserController extends Controller
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
             'nomorTelp' => 'nullable|string|max:20',
             'password' => 'nullable|string|min:8',
-            'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'profilePicture' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
         // Update data dasar
@@ -44,9 +45,20 @@ class UserController extends Controller
 
         // Upload foto jika ada
         if ($request->hasFile('profilePicture')) {
+            
+            $file = $request->file('profilePicture');
 
+            $destination = public_path('storage/Asset');
+            Log::info('File received: ' . json_encode([
+                'originalName' => $file->getClientOriginalName(),
+                'size' => $file->getSize(),
+                'isValid' => $file->isValid(),
+            ]));
+            Log::error("Tidak ada file 'profilePicture' yang dikirim.", ['requestKeys' => $request->allFiles()]);
+            Log::info('Path:', ['path' => $file->getPathname()]);
             $filename = $request->file('profilePicture')->hashName();
-            $request->file('profilePicture')->storeAs('Asset', $filename, 'public');
+            $file->move($destination, $filename);
+            // $request->file('profilePicture')->storeAs('Asset', $filename, 'public');
             $user->profilePicture = $filename;
         }
 

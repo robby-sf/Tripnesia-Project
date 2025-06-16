@@ -13,15 +13,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="font-inter">
-    <x-admin-navbar></x-admin-navbar>
-    <div class="flex flex-nowrap">
-        <x-admin-side-bar class="w-70"></x-admin-side-bar>
+<body class="font-inter h-full">
+
+    
+
+
+    <div class="flex flex-nowrap w-full">
+        <div class="sticky top-0">
+            <div class="flex flex-col">
+                <x-admin-header></x-admin-header>
+                <x-admin-side-bar class="w-72 flex-1"></x-admin-side-bar>
+            </div>
+        </div>
+        
 
         <main class="flex flex-col w-full">
-            <x-admin-header>
-                {{ $title }}
-            </x-admin-header>
+            
+            <x-admin-navbar class="bg-gray-100 w-full">Destination</x-admin-navbar>   
             <div class="flex-1 p-6">
                 
                 <div class="flex justify-end mb-4">
@@ -97,5 +105,8 @@
             </div>
         </main>
     </div>
+    </div>
+
+    
 </body>
 </html>
