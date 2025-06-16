@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout/process/{id}', [CheckoutController::class, 'process'])->name('checkout.process');
     Route::get('/account/settings', [UserController::class, 'setting'])->name('account.settings');
     Route::post('/account/settings', [UserController::class, 'update'])->name('account.update');
+    Route::post('/checkout/update-status-success/{order_id}', [CheckoutController::class, 'updateStatusOnSuccess'])->name('checkout.updateStatusOnSuccess');
 });
 
 Route::post('/midtrans/notification', [CheckoutController::class, 'notificationHandler'])->name('midtrans.notification');
@@ -70,8 +71,6 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/pesanan/{transaction}', [OrderController::class, 'show'])->name('pesanan.show');
     Route::post('/pesanan/{transaction}/update-status', [OrderController::class, 'updateStatus'])->name('pesanan.updateStatus');
     Route::delete('/pesanan/{transaction}', [OrderController::class, 'destroy'])->name('pesanan.destroy');
-    Route::post('/pesanan/{transaction}/confirm', [OrderController::class, 'confirmOrder'])->name('pesanan.confirm');
-    Route::post('/pesanan/{transaction}/refund', [OrderController::class, 'processRefund'])->name('pesanan.refund');
 });
 
 Route::get('/event', [EventController::class, 'index']);
@@ -82,8 +81,4 @@ Route::get('/admin/event/create', [EventController::class, 'create'])->name('adm
 Route::post('/admin/event', [EventController::class, 'store'])->name('admin.event.store');
 Route::get('/admin', function () {
     return view('Admin.admin', ['title' => 'Dashboard']);
-});
-
-Route::get('/admin/pesanan', function () {
-    return view('pesanan', ['title' => 'Pesanan']);
 });

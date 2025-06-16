@@ -16,7 +16,6 @@ class CheckoutController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except('notificationHandler');
-
         Config::$serverKey = config('midtrans.server_key');
         Config::$isProduction = config('midtrans.is_production');
         Config::$isSanitized = config('midtrans.is_sanitized');
@@ -62,7 +61,6 @@ class CheckoutController extends Controller
                     'name' => $package->name,
                 ],
             ],
-
             'expiry' => [
                 'duration' => 1,
                 'unit' => 'hour',
@@ -83,11 +81,9 @@ class CheckoutController extends Controller
     public function notificationHandler(Request $request)
     {
         $notif = new MidtransNotification();
-
         $transactionStatus = $notif->transaction_status;
         $fraudStatus = $notif->fraud_status;
         $orderId = $notif->order_id;
-
         $transaction = Transaction::where('order_id', $orderId)->first();
 
         if (!$transaction) {
@@ -99,16 +95,18 @@ class CheckoutController extends Controller
             return response()->json(['message' => 'Invalid signature.'], 403);
         }
 
+        if (in_array($transaction->payment_status, ['confirmed', 'refunded', 'completed'])) {
+            return response()->json(['message' => 'Transaction status already finalized by admin.']);
+        }
+
         $newStatus = $transaction->payment_status;
 
         if ($transactionStatus == 'capture') {
-            if ($fraudStatus == 'challenge') {
-                $newStatus = 'challenge';
-            } else if ($fraudStatus == 'accept') {
-                $newStatus = 'success';
+            if ($fraudStatus == 'accept') {
+                $newStatus = 'awaiting_confirmation';
             }
         } else if ($transactionStatus == 'settlement') {
-            $newStatus = 'success';
+            $newStatus = 'awaiting_confirmation';
         } else if ($transactionStatus == 'pending') {
             $newStatus = 'pending';
         } else if ($transactionStatus == 'deny') {
@@ -119,39 +117,29 @@ class CheckoutController extends Controller
             $newStatus = 'cancelled';
         }
 
-        if ($transaction->payment_status != $newStatus) {
-            $transaction->payment_status = $newStatus;
-        }
-
+        $transaction->payment_status = $newStatus;
         $transaction->payment_details = json_encode($notif->getResponse());
         $transaction->save();
-
-        if ($newStatus == 'success') {
-        }
 
         return response()->json(['message' => 'Notification processed successfully.']);
     }
 
     public function finish(Request $request)
     {
-        $orderId = $request->query('order_id');
+        return redirect()->route('home');
+    }
 
-        if (!$orderId) {
-            return redirect()->route('home')->with('error', 'Akses tidak valid atau transaksi tidak ditemukan.');
+    public function updateStatusOnSuccess(Request $request, $order_id)
+    {
+        $transaction = Transaction::where('order_id', $order_id)->first();
+
+        if ($transaction && $transaction->payment_status === 'pending') {
+            $transaction->payment_status = 'Menunggu Konfirmasi Admin';
+            $transaction->save();
+
+            return response()->json(['status' => 'success', 'message' => 'Status updated to awaiting confirmation.']);
         }
 
-        $transaction = \App\Models\Transaction::with('package')->where('order_id', $orderId)->first();
-
-        if (!$transaction) {
-            return redirect()->route('home')->with('error', 'Transaksi tidak ditemukan.');
-        }
-
-        if ($transaction->payment_status == 'success' || $transaction->payment_status == 'settlement') {
-            return view('success', compact('transaction'));
-        } elseif ($transaction->payment_status == 'pending' || $transaction->payment_status == 'challenge') {
-            return view('pending', compact('transaction'));
-        } else {
-            return view('failed', compact('transaction'));
-        }
+        return response()->json(['status' => 'no_change', 'message' => 'Transaction not found or status already updated.'], 404);
     }
 }
