@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/account/settings', [UserController::class, 'setting'])->name('account.settings');
     Route::post('/account/settings', [UserController::class, 'update'])->name('account.update');
     Route::post('/checkout/update-status-success/{order_id}', [CheckoutController::class, 'updateStatusOnSuccess'])->name('checkout.updateStatusOnSuccess');
+    Route::post('/checkout/update-status/{order_id}', [CheckoutController::class, 'updateStatusOnSuccess'])->name('checkout.updateStatus');
 });
 
 Route::post('/midtrans/notification', [CheckoutController::class, 'notificationHandler'])->name('midtrans.notification');

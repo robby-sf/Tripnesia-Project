@@ -10,6 +10,8 @@ use Midtrans\Config;
 use Midtrans\Snap;
 use Midtrans\Notification as MidtransNotification;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class CheckoutController extends Controller
 {
@@ -31,6 +33,18 @@ class CheckoutController extends Controller
 
     public function process(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'ticket_date' => 'required|date|after_or_equal:today',
+        ], [
+            'ticket_date.required' => 'Tanggal wisata wajib diisi.',
+            'ticket_date.date' => 'Format tanggal tidak valid.',
+            'ticket_date.after_or_equal' => 'Tanggal wisata tidak boleh untuk hari yang sudah lewat.',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->first()], 422);
+        }
+
         $user = Auth::user();
         $package = Package::findOrFail($id);
 
@@ -39,10 +53,13 @@ class CheckoutController extends Controller
         $transaction = Transaction::create([
             'user_id' => $user->id,
             'package_id' => $package->id,
+            'ticket_date' => $request->input('ticket_date'),
             'order_id' => $orderId,
             'total_amount' => $package->price,
             'payment_status' => 'pending',
         ]);
+
+        $formattedDate = Carbon::parse($request->input('ticket_date'))->format('d M Y');
 
         $params = [
             'transaction_details' => [
@@ -58,7 +75,7 @@ class CheckoutController extends Controller
                     'id' => $package->id,
                     'price' => $package->price,
                     'quantity' => 1,
-                    'name' => $package->name,
+                    'name' => $package->name . ' (Wisata tgl: ' . $formattedDate . ')',
                 ],
             ],
             'expiry' => [
@@ -69,8 +86,10 @@ class CheckoutController extends Controller
 
         try {
             $snapToken = Snap::getSnapToken($params);
+
             $transaction->snap_token = $snapToken;
             $transaction->save();
+
             return response()->json(['snap_token' => $snapToken]);
         } catch (\Exception $e) {
             report($e);
@@ -134,7 +153,7 @@ class CheckoutController extends Controller
         $transaction = Transaction::where('order_id', $order_id)->first();
 
         if ($transaction && $transaction->payment_status === 'pending') {
-            $transaction->payment_status = 'Menunggu Konfirmasi Admin';
+            $transaction->payment_status = 'awaiting_confirmation';
             $transaction->save();
 
             return response()->json(['status' => 'success', 'message' => 'Status updated to awaiting confirmation.']);

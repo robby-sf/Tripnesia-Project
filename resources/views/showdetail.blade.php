@@ -139,7 +139,7 @@
                             <dt>Status</dt>
                             <dd>
                                 @php
-                                    $statusClass = 'status-refunded'; // Default
+                                    $statusClass = 'status-refunded';
                                     $statusText = ucfirst(str_replace('_', ' ', $transaction->payment_status));
 
                                     switch (strtolower($transaction->payment_status)) {
@@ -154,7 +154,7 @@
                                             $statusText = 'Sukses (Tersedia)';
                                             break;
                                         case 'completed':
-                                            $statusClass = 'status-success';
+                                            $statusClass = 'status-completed';
                                             $statusText = 'Selesai';
                                             break;
                                         case 'pending':
@@ -167,13 +167,14 @@
                                         case 'cancelled':
                                         case 'deny':
                                             $statusClass = 'status-failed';
+                                            $statusText = 'Dibatalkan';
                                             break;
                                     }
                                 @endphp
                                 <span class="status-badge {{ $statusClass }}">{{ $statusText }}</span>
                             </dd>
                             <dt>Total</dt>
-                            <dd class="text-gray-900 font-bold text-xl text-blue-600">Rp
+                            <dd class="text-gray-900 font-bold text-xl">Rp
                                 {{ number_format($transaction->total_amount, 0, ',', '.') }}</dd>
                         </dl>
                     </div>
@@ -183,10 +184,12 @@
                         <dl class="dl-grid text-sm">
                             <dt>Nama Paket</dt>
                             <dd>{{ $transaction->package->name ?? 'N/A' }}</dd>
-
+                            <dt>Tanggal Tiket</dt>
+                            <dd class="font-bold text-blue-600 text-base">
+                                {{ $transaction->ticket_date ? \Carbon\Carbon::parse($transaction->ticket_date)->format('d F Y') : 'Tidak ditentukan' }}
+                            </dd>
                             <dt>Nama Pelanggan</dt>
                             <dd>{{ $transaction->user->nama ?? 'N/A' }}</dd>
-
                             <dt>Email Pelanggan</dt>
                             <dd>{{ $transaction->user->email ?? 'N/A' }}</dd>
                         </dl>
@@ -198,7 +201,7 @@
                         <h3 class="text-lg font-semibold text-gray-900 mb-4">Update Status</h3>
 
                         <p class="text-sm text-gray-600 mb-4">Gunakan form di bawah ini untuk mengkonfirmasi
-                            ketersediaan tiket, memproses refund, atau menandai pesanan sebagai selesai.</p>
+                            ketersediaan tiket, membatalkan pesanan, atau menandai pesanan sebagai selesai.</p>
 
                         <form action="{{ route('admin.pesanan.updateStatus', $transaction->id) }}" method="POST">
                             @csrf
@@ -212,25 +215,27 @@
                                         <option value="awaiting_confirmation">Perlu Dikonfirmasi</option>
                                         <option value="success">Sukses (Tiket Tersedia)</option>
                                         <option value="completed">Selesai (Pesanan Tuntas)</option>
-                                        <option value="refunded">Refund (Kembalikan Dana)</option>
+                                        <option value="cancelled">Batalkan Pesanan (Cancelled)</option>
                                     </select>
                                 </div>
 
-                                <div x-show="selectedStatus === 'refunded'" x-transition x-cloak>
-                                    <label for="reason" class="block text-sm font-medium text-gray-700">Alasan Refund
-                                        (Wajib jika status Refunded)</label>
+                                <div x-show="selectedStatus === 'cancelled'" x-transition x-cloak>
+                                    <label for="reason" class="block text-sm font-medium text-gray-700">Alasan
+                                        Pembatalan
+                                        (Wajib diisi)</label>
                                     <input type="text" id="reason" name="reason"
-                                        :required="selectedStatus === 'refunded'"
+                                        :required="selectedStatus === 'cancelled'"
                                         class="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                                        placeholder="Contoh: Stok tiket habis" value="{{ old('reason') }}">
+                                        placeholder="Contoh: Stok habis / permintaan pelanggan"
+                                        value="{{ old('reason') }}">
                                 </div>
 
                                 <div class="border-t pt-4 text-right">
                                     <button type="submit" :disabled="!selectedStatus"
                                         x-on:click="
                                                 let message = 'Anda yakin ingin mengubah status pesanan ini?';
-                                                if (selectedStatus === 'refunded') {
-                                                    message = 'PERINGATAN: Proses ini akan mengembalikan dana ke pelanggan. Lanjutkan?';
+                                                if (selectedStatus === 'cancelled') {
+                                                    message = 'PERINGATAN: Aksi ini akan membatalkan pesanan di sistem. Lanjutkan?';
                                                 }
                                                 if (!confirm(message)) {
                                                     event.preventDefault();

@@ -96,6 +96,9 @@
                                     Paket</th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    Tanggal Tiket</th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     Total</th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -117,11 +120,16 @@
                                         {{ $transaction->user->nama ?? 'N/A' }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                         {{ $transaction->package->name ?? 'N/A' }}</td>
+
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 font-semibold">
+                                        {{ $transaction->ticket_date ? \Carbon\Carbon::parse($transaction->ticket_date)->format('d M Y') : 'N/A' }}
+                                    </td>
+
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Rp
                                         {{ number_format($transaction->total_amount, 0, ',', '.') }}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         @php
-                                            $statusClass = 'status-refunded'; // Default
+                                            $statusClass = 'status-refunded';
                                             $statusText = ucfirst(str_replace('_', ' ', $transaction->payment_status));
 
                                             switch (strtolower($transaction->payment_status)) {
@@ -136,7 +144,7 @@
                                                     $statusText = 'Sukses (Tersedia)';
                                                     break;
                                                 case 'completed':
-                                                    $statusClass = 'status-success';
+                                                    $statusClass = 'status-completed';
                                                     $statusText = 'Selesai';
                                                     break;
                                                 case 'pending':
@@ -174,7 +182,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="px-6 py-4 text-center text-sm text-gray-500">Tidak ada
+                                    <td colspan="9" class="px-6 py-4 text-center text-sm text-gray-500">Tidak ada
                                         data pesanan.</td>
                                 </tr>
                             @endforelse
