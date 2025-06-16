@@ -1,4 +1,4 @@
-<aside class="w-64 flex-shrink-0 bg-[#0f172a] text-gray-300 flex flex-col min-h-screen justify-between">
+<aside class="w-64 shrink-0 bg-[#0f172a] text-gray-300 flex flex-col min-h-screen justify-between">
     
     <!-- Bagian Atas: Logo dan Navigasi Utama -->
     <div>
@@ -17,10 +17,40 @@
                 Destination
             </a>
 
+            <a href="/admin/package" class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e293b] hover:text-white {{ request()->is('admin/package*') ? 'bg-[#1e293b] text-white' : '' }}">
+                <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16h8v-2a2 2 0 00-2-2h-4a2 2 0 00-2 2v2zM9 6h6v4H9V6z" />
+                </svg>
+                Package
+            </a>
+
+            <a href="/admin/event" class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e293b] hover:text-white {{ request()->is('admin/event*') ? 'bg-[#1e293b] text-white' : '' }}">
+                <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                Event
+            </a>
+
             <a href="/admin/pesanan" class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e293b] hover:text-white {{ request()->is('admin/pesanan*') ? 'bg-[#1e293b] text-white' : '' }}">
                 <!-- Ikon Pesanan/Package -->
                 <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
                 Pesanan
+            </a>
+
+            <a href="/admin/user" class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e293b] hover:text-white {{ request()->is('admin/user*') ? 'bg-[#1e293b] text-white' : '' }}">
+                <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                    <circle cx="8.5" cy="7.5" r="4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                </svg>
+                User
+            </a>
+
+            <a href="/admin/add-admin" class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e293b] hover:text-white {{ request()->is('admin/add-admin*') ? 'bg-[#1e293b] text-white' : '' }}">
+                <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                    <circle cx="8.5" cy="7.5" r="4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 8v6m-3-3h6" />
+                </svg>
+                Tambah Admin
             </a>
 
             <a href="/admin/setting" class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e293b] hover:text-white {{ request()->is('admin/setting*') ? 'bg-[#1e293b] text-white' : '' }}">
