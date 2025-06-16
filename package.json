@@ -32,6 +32,7 @@
     },
     "homepage": "https://github.com/robby-sf/Tripnesia-Project#readme",
     "dependencies": {
-        "@tailwindcss/cli": "^4.1.6"
+        "@tailwindcss/cli": "^4.1.6",
+        "@tailwindcss/line-clamp": "^0.4.4"
     }
 }
