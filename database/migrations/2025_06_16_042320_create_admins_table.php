@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('tanggal_lahir');
             $table->string('role');
             $table->string('password');
-            $table->string('profilePicture')->default('profilekosong.jpg');
+            $table->string('profile_picture')->default('profilekosong.jpg');
             $table->integer('nomor_telp');
             $table->timestamps();
         });
