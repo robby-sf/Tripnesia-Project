@@ -1,98 +1,90 @@
-<!DOCTYPE html>
-<html lang="id">
+<!doctype html>
+<html class="h-full bg-gray-100">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Settings</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <style>
-        body {
-            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
-        }
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="png" href="/Asset/icon Web.png">
+    @vite('resources/css/app.css')
+    <title>Tripnesia</title>
 
+    <style>
         [x-cloak] {
             display: none;
         }
     </style>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+
 </head>
 
-<body class="bg-gray-50 flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 md:p-12 rounded-lg shadow-sm w-full max-w-2xl" x-data="{ show: false }">
-        <h1 class="text-2xl font-light text-gray-700 tracking-wider mb-8">ACCOUNT SETTINGS</h1>
+<body>
+    <x-Navbar></x-Navbar>
 
-        <form action="#" method="POST" class="space-y-6">
-            <!-- First Name -->
-            <div>
-                <label for="first-name" class="block text-sm font-medium text-gray-500 mb-1">First name</label>
-                <input type="text" id="first-name" name="first-name" value="Ryan"
-                    class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
-            </div>
+    <section class="relative bg-cover bg-center h-[450px]"
+        style="background-image: url('{{ asset('Asset/Raja Ampat.jpg') }}')">
+        <div class="absolute inset-0 bg-black/50 h-[450px] flex flex-col items-center justify-center text-white">
+            <h2 class="text-4xl md:text-5xl font-bold">Temukan Surga Tersembunyi di Indonesia</h2>
+            <p class="mt-4 text-lg md:text-xl">Dari pegunungan sejuk hingga laut tropis yang jernih</p>
+        </div>
+    </section>
 
-            <!-- Last Name -->
-            <div>
-                <label for="last-name" class="block text-sm font-medium text-gray-500 mb-1">Last name</label>
-                <input type="text" id="last-name" name="last-name" value="Gosling"
-                    class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
-            </div>
+    <section class="py-16 bg-white relative" x-data="{
+        destination: {{ Js::from($destination) }},
+        scrollLeft() { $refs.slider.scrollBy({ left: -500, behavior: 'smooth' }) },
+        scrollRight() { $refs.slider.scrollBy({ left: 500, behavior: 'smooth' }) }
+    }">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-semibold mb-10 text-center">
+                Destinasi Wisata Yang Mungkin Kamu Suka
+            </h2>
 
-            <!-- Username -->
-            <div>
-                <label for="username" class="block text-sm font-medium text-gray-500 mb-1">Username</label>
-                <input type="text" id="username" name="username" value="Sebastian"
-                    class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
-            </div>
-
-            <!-- Password + Toggle -->
             <div class="relative">
-                <label for="password" class="block text-sm font-medium text-gray-500 mb-1">Password</label>
-                <input :type="show ? 'text' : 'password'" id="password" name="password" value="12345678"
-                    class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
-
-                <!-- Toggle Eye Icon -->
-                <div class="absolute inset-y-0 right-0 top-7 pr-3 flex items-center cursor-pointer" @click="show = !show">
-                    <svg x-show="!show" class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M2.458 12C3.732 7.943 7.522 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.478 0-8.268-2.943-9.542-7z" />
-                    </svg>
-                    <svg x-show="show" x-cloak class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.963 9.963 0 012.233-3.592m1.735-1.4A9.99 9.99 0 0112 5c4.478 0 8.268 2.943 9.542 7a9.971 9.971 0 01-4.343 5.303M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 3l18 18" />
-                    </svg>
+                <div class="flex overflow-x-auto space-x-6 pb-4 scroll-smooth no-scrollbar" x-ref="slider">
+                    <template x-for="(dest, index) in destination" :key="index">
+                        <a :href="'/destination/' + dest.slug"
+                            class="max-w-md flex-shrink-0 bg-white rounded-xl shadow-md 
+                          transition-transform transform hover:scale-105 duration-300 ease-in-out overflow-hidden">
+                            <img :src="'/storage/Asset/' + dest.gambar" class="w-full h-40 object-cover rounded-t-xl" />
+                            <div class="p-4">
+                                <h4 class="font-bold text-lg" x-text="dest.nama"></h4>
+                                <p class="text-sm text-gray-600 line-clamp-2" x-text="dest.deskripsi"></p>
+                            </div>
+                        </a>
+                    </template>
                 </div>
-            </div>
 
-            <!-- Email -->
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-500 mb-1">E-mail</label>
-                <input type="email" id="email" name="email" value="ryan876@gmail.com"
-                    class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
-            </div>
-
-            <!-- Phone -->
-            <div>
-                <label for="phone-number" class="block text-sm font-medium text-gray-500 mb-1">Phone number</label>
-                <input type="tel" id="phone-number" name="phone-number" value="+380990760179"
-                    class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400">
-            </div>
-
-            <!-- Buttons -->
-            <div class="flex items-center space-x-6 pt-4">
-                <button type="submit"
-                    class="bg-cyan-500 text-white font-semibold py-2.5 px-10 rounded-full hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-500 transition-colors">
-                    Save
+                <button @click="scrollLeft"
+                    class="absolute left-0 top-1/2 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-600" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
                 </button>
-                <a href="#" class="text-gray-600 hover:text-gray-900 font-medium">Cancel</a>
-            </div>
-        </form>
-    </div>
-</body>
 
-</html>
+                <button @click="scrollRight"
+                    class="absolute right-0 top-1/2 w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-600" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+
+            </div>
+        </div>
+
+    </section>
+
+
+</body>

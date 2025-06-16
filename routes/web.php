@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\OrderController;
 use Illuminate\Auth\Events\Login;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('index');
@@ -54,6 +55,8 @@ Route::post('/register', [SignUpController::class, 'register'])->name('register'
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.form');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
+Route::get('/login/admin', [AdminController::class, 'showloginForm'])->name('adminLogin');
+
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware('auth')->group(function () {
@@ -83,3 +86,17 @@ Route::post('/admin/event', [EventController::class, 'store'])->name('admin.even
 Route::get('/admin', function () {
     return view('Admin.admin', ['title' => 'Dashboard']);
 });
+Route::get('/admin/event', [EventController::class, 'adminIndex'])->name('admin.event.index');
+Route::get('/admin/event/{id}/edit', [EventController::class, 'edit'])->name('admin.event.edit');
+Route::put('/admin/event/{id}', [EventController::class, 'update'])->name('admin.event.update');
+Route::delete('/admin/event/{id}', [EventController::class, 'destroy'])->name('admin.event.destroy');
+
+Route::get('/admin/pesanan', function () {
+return view('pesanan', ['title' => 'Pesanan']);
+});
+
+
+
+
+
+

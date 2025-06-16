@@ -46,4 +46,47 @@ public function store(Request $request)
     return redirect('/event')->with('success', 'Event berhasil ditambahkan!');
 }
 
+public function adminIndex()
+{
+    $events = Event::all();
+    return view('admin.eventIndex', compact('events'));
+}
+
+public function edit($id)
+{
+    $event = Event::findOrFail($id);
+    return view('admin.eventEdit', compact('event'));
+}
+
+public function update(Request $request, $id)
+{
+    $event = Event::findOrFail($id);
+
+    $validated = $request->validate([
+        'judul' => 'required|string|max:255',
+        'slug' => 'required|string|max:255|unique:events,slug,' . $id,
+        'deskripsi' => 'required|string',
+        'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
+
+    if ($request->hasFile('gambar')) {
+        $path = $request->file('gambar')->store('events', 'public');
+        $validated['gambar'] = $path;
+    }
+
+    $validated['slug'] = Str::slug($validated['slug']);
+    $event->update($validated);
+
+    return redirect()->route('admin.event.index')->with('success', 'Event berhasil diperbarui!');
+}
+
+public function destroy($id)
+{
+    $event = Event::findOrFail($id);
+    $event->delete();
+
+    return redirect()->route('admin.event.index')->with('success', 'Event berhasil dihapus!');
+}
+
+
 }

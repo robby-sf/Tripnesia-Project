@@ -27,7 +27,7 @@ class CheckoutController extends Controller
     public function show($id)
     {
         $package = Package::findOrFail($id);
-        $user = Auth::user();
+        $user = Auth::guard('web')->user();
         return view('checkout', compact('package', 'user'));
     }
 

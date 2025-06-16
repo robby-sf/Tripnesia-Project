@@ -19,10 +19,10 @@ class LoginController extends Controller
         ]);
         $remember = $request->has('remember');
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
+        if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
             $request->session()->regenerate();
             
-            $user = Auth::user();
+            $user = Auth::guard('web')->user();
             
             session([
                 'user_id' => $user->id,
@@ -41,7 +41,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
