@@ -90,13 +90,3 @@ Route::get('/admin/event', [EventController::class, 'adminIndex'])->name('admin.
 Route::get('/admin/event/{id}/edit', [EventController::class, 'edit'])->name('admin.event.edit');
 Route::put('/admin/event/{id}', [EventController::class, 'update'])->name('admin.event.update');
 Route::delete('/admin/event/{id}', [EventController::class, 'destroy'])->name('admin.event.destroy');
-
-Route::get('/admin/pesanan', function () {
-return view('pesanan', ['title' => 'Pesanan']);
-});
-
-
-
-
-
-
