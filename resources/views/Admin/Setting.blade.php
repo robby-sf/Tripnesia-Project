@@ -61,27 +61,27 @@
                         
                         <div>
                             <label for="nama" class="block text-sm font-medium text-gray-600 mb-1">Username</label>
-                            <input type="text" id="nama" name="nama" value="{{ old('nama', $admin->nama) }}" class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition">
+                            <input type="text" id="nama" name="nama" value="{{ old('nama', $admin->nama ?? '') }}" class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition">
                         </div>
                         
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-600 mb-1">E-mail</label>
-                            <input type="email" id="email" name="email" value="{{ old('email', $admin->email) }}" class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition">
+                            <input type="email" id="email" name="email" value="{{ old('email', $admin->email ?? '') }}" class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition">
                         </div>
                         
                         <div>
                             <label for="nomor_telp" class="block text-sm font-medium text-gray-600 mb-1">Phone Number</label>
-                            <input type="tel" id="nomor_telp" name="nomor_telp" value="{{ old('nomor_telp', $admin->nomor_telp) }}" class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition">
+                            <input type="tel" id="nomor_telp" name="nomor_telp" value="{{ old('nomor_telp', $admin->nomor_telp ?? '') }}" class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition">
                         </div>
 
                         <div>
                             <label for="tanggal_lahir" class="block text-sm font-medium text-gray-600 mb-1">Date of Birth</label>
-                            <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir', $admin->tanggal_lahir) }}" class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition">
+                            <input type="date" id="tanggal_lahir" name="tanggal_lahir" value="{{ old('tanggal_lahir', $admin->tanggal_lahir ?? '') }}" class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition">
                         </div>
 
                         <div class="md:col-span-2">
                             <label for="alamat" class="block text-sm font-medium text-gray-600 mb-1">Address</label>
-                            <textarea id="alamat" name="alamat" rows="3" class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition">{{ old('alamat', $admin->alamat) }}</textarea>
+                            <textarea id="alamat" name="alamat" rows="3" class="w-full px-4 py-2.5 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-cyan-400 transition">{{ old('alamat', $admin->alamat ?? '') }}</textarea>
                         </div>
 
                         <div class="relative">

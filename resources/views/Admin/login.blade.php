@@ -16,7 +16,7 @@
 
 <body class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="w-full max-w-md">
-        <form method="POST" action="{{ route('login') }}" class="relative z-10 w-full">
+        <form method="POST" action="{{ route('adminLogin') }}" class="relative z-10 w-full">
             @csrf
 
             <div class="bg-white p-8 rounded-xl shadow-lg w-full">

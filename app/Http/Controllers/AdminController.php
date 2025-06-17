@@ -41,7 +41,7 @@ class AdminController extends Controller
                 'admin_role' => $admin->role,
             ]);
             
-            return redirect()->intended('/');
+            return redirect()->intended('/admin');
         }
 
         return back()->withErrors([
@@ -134,4 +134,6 @@ class AdminController extends Controller
 
         return redirect()->route('admin.settings')->with('success', 'Data berhasil diperbarui.');
     }
+
+    
 }
