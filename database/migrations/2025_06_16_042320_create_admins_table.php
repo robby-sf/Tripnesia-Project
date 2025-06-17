@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations
      */
     public function up(): void
     {
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('role');
             $table->string('password');
             $table->string('profile_picture')->default('profilekosong.jpg');
-            $table->integer('nomor_telp');
+            $table->string('nomor_telp');
             $table->timestamps();
         });
     }

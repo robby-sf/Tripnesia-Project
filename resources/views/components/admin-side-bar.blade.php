@@ -44,7 +44,7 @@
                 User
             </a>
 
-            <a href="/admin/add-admin" class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e293b] hover:text-white {{ request()->is('admin/add-admin*') ? 'bg-[#1e293b] text-white' : '' }}">
+            <a href="/register/admin" class="flex items-center px-4 py-2.5 text-sm font-medium rounded-lg hover:bg-[#1e293b] hover:text-white {{ request()->is('admin/add-admin*') ? 'bg-[#1e293b] text-white' : '' }}">
                 <svg class="w-5 h-5 mr-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
                     <circle cx="8.5" cy="7.5" r="4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />

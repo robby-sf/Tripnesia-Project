@@ -23,7 +23,7 @@ class UserController extends Controller
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
-            'nomorTelp' => 'nullable|string|max:20',
+            'nomorTelp' => 'nullable|string|max:15|regex:/^\+?[0-9]+$/',
             'password' => 'nullable|string|min:8',
             'profilePicture' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);

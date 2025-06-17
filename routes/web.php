@@ -32,15 +32,7 @@ Route::get('/setting', function () {
 
 
 
-Route::get('/admin/destination-data', [DestinationController::class, 'data'])->name('Destinations');
 
-Route::get('/admin/destination/create', [DestinationController::class, 'create'])->name('create');
-Route::post('/admin/destination/create', [DestinationController::class, 'store'])->name('store');
-
-Route::get('/admin/destination/{id}/edit', [DestinationController::class, 'edit'])->name('edit');
-Route::put('/admin/destination/{id}', [DestinationController::class, 'update'])->name('update');
-
-Route::delete('/admin/destination/{id}', [DestinationController::class, 'delete'])->name('destination.delete');
 
 Route::get('/destination', [DestinationController::class, 'index']);
 Route::get('/destination/{slug}', [DestinationController::class, 'show']);
@@ -56,6 +48,8 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login.for
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 Route::get('/login/admin', [AdminController::class, 'showloginForm'])->name('adminLogin');
+Route::get('/register/admin', [AdminController::class, 'showRegisterForm'])->name('adminRegister.form');
+Route::post('/register/admin', [AdminController::class, 'register'])->name('adminRegister');
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -66,6 +60,16 @@ Route::middleware('auth')->group(function () {
     Route::post('/account/settings', [UserController::class, 'update'])->name('account.update');
     Route::post('/checkout/update-status-success/{order_id}', [CheckoutController::class, 'updateStatusOnSuccess'])->name('checkout.updateStatusOnSuccess');
     Route::post('/checkout/update-status/{order_id}', [CheckoutController::class, 'updateStatusOnSuccess'])->name('checkout.updateStatus');
+    
+    
+    Route::get('/admin/destination-data', [DestinationController::class, 'data'])->name('Destinations');
+    Route::get('/admin/destination/create', [DestinationController::class, 'create'])->name('create');
+    Route::post('/admin/destination/create', [DestinationController::class, 'store'])->name('store');
+    Route::get('/admin/destination/{id}/edit', [DestinationController::class, 'edit'])->name('edit');
+    Route::put('/admin/destination/{id}', [DestinationController::class, 'update'])->name('update');
+    Route::delete('/admin/destination/{id}', [DestinationController::class, 'delete'])->name('destination.delete');
+    Route::get('/admin/settings', [AdminController::class, 'showSetting'])->name('admin.settings');
+    Route::post('/admin/settings', [AdminController::class, 'update'])->name('admin.update');
 });
 
 Route::post('/midtrans/notification', [CheckoutController::class, 'notificationHandler'])->name('midtrans.notification');
@@ -75,6 +79,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/pesanan/{transaction}', [OrderController::class, 'show'])->name('pesanan.show');
     Route::post('/pesanan/{transaction}/update-status', [OrderController::class, 'updateStatus'])->name('pesanan.updateStatus');
     Route::delete('/pesanan/{transaction}', [OrderController::class, 'destroy'])->name('pesanan.destroy');
+    
+    
 });
 
 Route::get('/event', [EventController::class, 'index']);

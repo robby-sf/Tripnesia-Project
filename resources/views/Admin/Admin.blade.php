@@ -90,9 +90,7 @@
                     </div>
                 </div>
 
-                <!-- Main Section: Revenue Chart and Events -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                    <!-- Revenue Chart -->
                     <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm" x-data="revenueChart()">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-lg font-semibold text-gray-800">Revenue</h3>
