@@ -88,7 +88,7 @@
 
         <div class="bg-white rounded-xl shadow-lg overflow-hidden">
             @if ($package->image)
-                <img src="{{ asset('asset/' . $package->image) }}" alt="{{ $package->name }}"
+                <img src="{{ asset('storage/' . $package->image) }}" alt="{{ $package->name }}"
                     class="w-full h-48 md:h-64 object-cover rounded-t-xl">
             @else
                 <div class="w-full h-48 md:h-64 bg-gray-200 flex items-center justify-center rounded-t-xl">
@@ -110,7 +110,7 @@
                 @endif
 
                 <p class="text-xl md:text-2xl font-semibold text-gray-800 mb-6">
-                    Harga: <span class="text-blue-600">Rp {{ number_format($package->price, 0, ',', '.') }}</span>
+                    Harga: <span class="text-gray-800 ">Rp {{ number_format($package->price, 0, ',', '.') }}</span>
                 </p>
 
                 <div class="mb-4">

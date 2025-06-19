@@ -32,9 +32,13 @@
             margin-top: 100px;
         }
     </style>
-    
-  <style>[x-cloak] { display: none; }</style>
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        [x-cloak] {
+            display: none;
+        }
+    </style>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body>
@@ -47,7 +51,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             @foreach ($packages as $package)
                 <div class="bg-white shadow-lg rounded-2xl overflow-hidden">
-                    <img src="{{ asset('asset/' . $package->image) }}" alt="{{ $package->name }}"
+                    <img src="{{ asset('storage/' . $package->image) }}" alt="{{ $package->name }}"
                         class="w-full h-48 object-cover">
 
                     <div class="p-6">

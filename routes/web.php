@@ -14,6 +14,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Admin\AdminPackageController;
 
 Route::get('/', function () {
     return view('index');
@@ -73,12 +74,11 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
     Route::get('/pesanan/{transaction}', [OrderController::class, 'show'])->name('pesanan.show');
     Route::post('/pesanan/{transaction}/update-status', [OrderController::class, 'updateStatus'])->name('pesanan.updateStatus');
     Route::delete('/pesanan/{transaction}', [OrderController::class, 'destroy'])->name('pesanan.destroy');
-    
-    
+    Route::resource('package', AdminPackageController::class);
 });
 
 Route::middleware(['auth:admin'])->group(function () {
-    
+
     Route::get('/admin/destination-data', [DestinationController::class, 'data'])->name('Destinations');
     Route::get('/admin/destination/create', [DestinationController::class, 'create'])->name('create');
     Route::post('/admin/destination/create', [DestinationController::class, 'store'])->name('store');
