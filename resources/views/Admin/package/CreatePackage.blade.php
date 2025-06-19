@@ -29,18 +29,11 @@
             <div class="flex-1 p-6 md:p-8">
                 <form action="{{ route('admin.package.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
-                    {{-- Card untuk Form --}}
                     <div class="bg-white shadow-md rounded-lg overflow-hidden">
-
-                        {{-- Header Card --}}
                         <div class="border-b border-gray-200 px-6 py-4">
                             <h3 class="text-lg font-semibold text-gray-800">Formulir Paket Baru</h3>
                         </div>
-
-                        {{-- Konten Form dengan Padding --}}
                         <div class="p-6">
-                            {{-- Grid untuk menata input --}}
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
                                 <div class="md:col-span-1">
@@ -102,7 +95,6 @@
                             </div>
                         </div>
 
-                        {{-- Footer Card untuk Tombol Aksi --}}
                         <div class="bg-gray-50 px-6 py-4 flex justify-end items-center space-x-3">
                             <a href="{{ route('admin.package.index') }}"
                                 class="bg-white hover:bg-gray-100 text-gray-700 font-medium px-4 py-2 rounded-lg transition text-sm border border-gray-300">

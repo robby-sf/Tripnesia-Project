@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" type="image/png" href="{{ asset('Asset/icon Web.png') }}">
     @vite('resources/css/app.css')
-    {{-- Judul diubah untuk halaman paket --}}
     <title>{{ $title ?? 'Kelola Paket' }} - Tripnesia</title>
 
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -17,7 +16,6 @@
 <body class="font-inter h-full">
 
     <div class="flex flex-nowrap w-full">
-        {{-- Kolom untuk Sidebar dan Header (Sama seperti pesanan.blade.php) --}}
         <div class="sticky top-0">
             <div class="flex flex-col">
                 <x-admin-header></x-admin-header>
@@ -25,18 +23,14 @@
             </div>
         </div>
 
-        {{-- Kolom untuk Konten Utama --}}
         <main class="flex flex-col w-full">
 
-            {{-- Navbar di dalam konten utama --}}
             <x-admin-navbar class="bg-gray-100 w-full">
-                {{-- Judul di navbar diubah --}}
                 {{ $title ?? 'Kelola Paket' }}
             </x-admin-navbar>
 
             <div class="flex-1 p-6 md:p-8">
 
-                {{-- Notifikasi Sukses atau Error --}}
                 @if (session('success'))
                     <div class="mb-4 p-4 bg-green-100 text-green-700 border border-green-300 rounded-md text-sm">
                         {{ session('success') }}
@@ -48,7 +42,6 @@
                     </div>
                 @endif
 
-                {{-- Tombol untuk menambah paket baru --}}
                 <div class="flex justify-end mb-4">
                     <a href="{{ route('admin.package.create') }}"
                         class="bg-blue-700 hover:bg-blue-800 text-white font-medium px-4 py-2 rounded-lg transition text-sm">
@@ -56,11 +49,9 @@
                     </a>
                 </div>
 
-                {{-- Tabel Daftar Paket --}}
                 <div class="bg-white shadow-md rounded-lg">
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
-                            {{-- Header Tabel disesuaikan dengan gaya pesanan.blade.php --}}
                             <thead class="bg-gray-50">
                                 <tr>
                                     <th scope="col"
@@ -84,7 +75,6 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                {{-- Looping data $packages --}}
                                 @forelse ($packages as $package)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -100,7 +90,6 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                                             Rp{{ number_format($package->price, 0, ',', '.') }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-4">
-                                            {{-- Tombol Aksi disesuaikan gayanya --}}
                                             <a href="{{ route('admin.package.edit', $package->id) }}"
                                                 class="text-indigo-600 hover:text-indigo-900">Edit</a>
                                             <form action="{{ route('admin.package.destroy', $package->id) }}"
@@ -115,7 +104,6 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        {{-- Colspan disesuaikan dengan jumlah kolom --}}
                                         <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
                                             Tidak ada data paket.
                                         </td>
@@ -124,7 +112,6 @@
                             </tbody>
                         </table>
                     </div>
-                    {{-- Paginasi disesuaikan gayanya --}}
                     @if ($packages->hasPages())
                         <div class="px-6 py-3 bg-white border-t">
                             {{ $packages->links() }}

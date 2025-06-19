@@ -56,25 +56,16 @@
 <body class="font-inter h-full">
 
     <div class="flex flex-nowrap w-full">
-        {{-- Kolom untuk Sidebar dan Header --}}
-        <div class="sticky top-0">
-            <div class="flex flex-col">
-                <x-admin-header></x-admin-header>
-                <x-admin-side-bar class="w-72 flex-1"></x-admin-side-bar>
-            </div>
-        </div>
 
-        {{-- Kolom untuk Konten Utama --}}
+
         <main class="flex flex-col w-full">
 
-            {{-- Navbar di dalam konten utama --}}
             <x-admin-navbar class="bg-gray-100 w-full">
                 {{ $title ?? 'Daftar Pesanan' }}
             </x-admin-navbar>
 
             <div class="flex-1 p-6 md:p-8">
 
-                {{-- Notifikasi Sukses atau Error --}}
                 @if (session('success'))
                     <div class="mb-4 p-4 bg-green-100 text-green-700 border border-green-300 rounded-md text-sm">
                         {{ session('success') }}
@@ -86,7 +77,6 @@
                     </div>
                 @endif
 
-                {{-- Tabel Daftar Pesanan --}}
                 <div class="bg-white shadow-md rounded-lg">
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">

@@ -27,7 +27,7 @@ class OrderController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(15);
 
-        return view('pesanan', [
+        return view('admin.checkout.Order', [
             'title' => 'Daftar Pesanan',
             'transactions' => $transactions
         ]);
@@ -47,7 +47,7 @@ class OrderController extends Controller
             'cancelled' => 'Cancelled',
         ];
 
-        return view('showdetail', [
+        return view('admin.checkout.ShowDetail', [
             'title' => 'Detail Pesanan: ' . $transaction->order_id,
             'transaction' => $transaction,
             'validStatuses' => $validStatuses

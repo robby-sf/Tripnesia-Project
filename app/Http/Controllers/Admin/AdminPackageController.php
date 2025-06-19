@@ -9,28 +9,17 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminPackageController extends Controller
 {
-    /**
-     * Menampilkan semua paket.
-     */
     public function index()
     {
         $packages = Package::latest()->paginate(10);
-        // PATH DIUBAH: dari 'admin.packages' menjadi 'admin.package'
         return view('admin.package.AdminPackage', compact('packages'));
     }
 
-    /**
-     * Menampilkan form tambah paket.
-     */
     public function create()
     {
-        // PATH DIUBAH: dari 'admin.packages' menjadi 'admin.package'
         return view('admin.package.CreatePackage');
     }
 
-    /**
-     * Menyimpan paket baru ke database.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -55,18 +44,11 @@ class AdminPackageController extends Controller
             ->with('success', 'Paket berhasil ditambahkan.');
     }
 
-    /**
-     * Menampilkan form edit paket.
-     */
     public function edit(Package $package)
     {
-        // PATH DIUBAH: dari 'admin.packages' menjadi 'admin.package'
         return view('admin.package.EditPackage', compact('package'));
     }
 
-    /**
-     * Mengupdate paket di database.
-     */
     public function update(Request $request, Package $package)
     {
         $request->validate([
@@ -95,9 +77,6 @@ class AdminPackageController extends Controller
             ->with('success', 'Paket berhasil diperbarui.');
     }
 
-    /**
-     * Menghapus paket dari database.
-     */
     public function destroy(Package $package)
     {
         Storage::disk('public')->delete($package->image);

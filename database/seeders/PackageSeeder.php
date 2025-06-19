@@ -4,17 +4,15 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Package;
-use Illuminate\Support\Facades\Storage; // <-- Import Storage facade
-use Illuminate\Support\Str;              // <-- Import Str untuk membuat nama acak
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class PackageSeeder extends Seeder
 {
     public function run(): void
     {
-        // Pastikan direktori tujuan ada. Jika tidak, buat.
         Storage::disk('public')->makeDirectory('packages');
 
-        // Daftar paket yang akan di-seed
         $packagesData = [
             [
                 'name' => 'Tour Candi Borobudur',
@@ -60,28 +58,21 @@ class PackageSeeder extends Seeder
             ],
         ];
 
-        // Looping untuk setiap data paket
         foreach ($packagesData as $data) {
-            // 1. Tentukan path gambar sumber di folder public/asset/
             $sourcePath = public_path('asset/' . $data['source_image']);
 
-            // Inisialisasi path gambar baru
             $newImagePath = null;
 
-            // 2. Cek apakah file sumber ada, lalu salin ke storage
             if (file_exists($sourcePath)) {
-                // Buat nama file baru yang unik untuk disimpan di storage
                 $newFileName = Str::random(10) . '_' . $data['source_image'];
                 $newImagePath = 'packages/' . $newFileName;
 
-                // Salin file dari public/asset ke storage/app/public/packages
                 Storage::disk('public')->put($newImagePath, file_get_contents($sourcePath));
             }
 
-            // 3. Buat record di database dengan path gambar yang baru
             Package::create([
                 'name' => $data['name'],
-                'image' => $newImagePath, // Gunakan path baru yang sudah disalin ke storage
+                'image' => $newImagePath,
                 'description' => $data['description'],
                 'price' => $data['price'],
                 'tickets' => $data['tickets'],
