@@ -57,6 +57,12 @@
 
     <div class="flex flex-nowrap w-full">
 
+        <div class="sticky top-0">
+            <div class="flex flex-col">
+                <x-admin-header></x-admin-header>
+                <x-admin-side-bar class="w-72 flex-1"></x-admin-side-bar>
+            </div>
+        </div>
 
         <main class="flex flex-col w-full">
 
