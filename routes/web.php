@@ -15,6 +15,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Admin\AdminPackageController;
 
 
 Route::get('/', function () {
