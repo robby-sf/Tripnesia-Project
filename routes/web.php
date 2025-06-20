@@ -14,7 +14,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Admin\AdminPackageController;
+
 
 Route::get('/', function () {
     return view('index');
@@ -35,6 +37,7 @@ Route::get('/setting', function () {
 
 
 
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 
 Route::get('/destination', [DestinationController::class, 'index']);
@@ -78,7 +81,6 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
 });
 
 Route::middleware(['auth:admin'])->group(function () {
-
     Route::get('/admin/destination-data', [DestinationController::class, 'data'])->name('Destinations');
     Route::get('/admin/destination/create', [DestinationController::class, 'create'])->name('create');
     Route::post('/admin/destination/create', [DestinationController::class, 'store'])->name('store');
@@ -101,3 +103,7 @@ Route::get('/admin/event', [EventController::class, 'adminIndex'])->name('admin.
 Route::get('/admin/event/{id}/edit', [EventController::class, 'edit'])->name('admin.event.edit');
 Route::put('/admin/event/{id}', [EventController::class, 'update'])->name('admin.event.update');
 Route::delete('/admin/event/{id}', [EventController::class, 'destroy'])->name('admin.event.destroy');
+
+
+Route::get('/autocomplete', [SearchController::class, 'autocomplete']);
+Route::get('/search', [SearchController::class, 'search'])->name('search');
