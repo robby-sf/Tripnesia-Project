@@ -49,7 +49,6 @@
                 <th class="px-6 py-3">Deskripsi</th>
                 <th class="px-6 py-3">Tanggal</th>
                 <th class="px-6 py-3">Lokasi</th>
-                <th class="px-6 py-3">Gambar</th>
                 <th class="px-6 py-3 text-center">Aksi</th>
             </tr>
             </thead>
@@ -61,13 +60,6 @@
                 <td class="px-6 py-4">{{ Str::limit($event->description, 50) }}</td>
                 <td class="px-6 py-4">{{ \Carbon\Carbon::parse($event->event_date)->format('d M Y') }}</td>
                 <td class="px-6 py-4">{{ $event->location }}</td>
-    <td class="px-6 py-4">
-      @if($event->image)
-        <img src="{{ asset('storage/events/' . $event->image) }}" width="100" class="rounded shadow">
-      @else
-        <span class="text-gray-400 italic">Tidak ada gambar</span>
-      @endif
-    </td>
     <td class="px-6 py-4 space-x-2 text-center">
       <a href="{{ route('admin.event.edit', $event->id) }}" class="bg-yellow-500 hover:bg-yellow-600 text-white px-3 py-1 rounded text-sm">Edit</a>
       <form action="{{ route('admin.event.destroy', $event->id) }}" method="POST" class="inline" onsubmit="return confirm('Yakin hapus event ini?')">
