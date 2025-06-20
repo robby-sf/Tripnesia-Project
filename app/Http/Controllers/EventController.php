@@ -22,40 +22,44 @@ class EventController extends Controller
 
     public function create()
 {
-    return view('admin.eventCreate'); // pastikan kamu buat file ini nanti
+    return view('Admin.events.eventCreate'); 
 }
 
 public function store(Request $request)
 {
     $validated = $request->validate([
-        'judul' => 'required|string|max:255',
+        'title' => 'required|string|max:255',
         'slug' => 'required|string|max:255|unique:events,slug',
-        'deskripsi' => 'required|string',
-        'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        'description' => 'required|string',
+        'event_date' => 'required|date',
+        'location' => 'required|string|max:255',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
     ]);
 
-    $path = $request->file('gambar')->store('events', 'public');
+    $path = $request->file('image') ? $request->file('image')->store('events', 'public') : null;
 
     Event::create([
-        'judul' => $validated['judul'],
+        'title' => $validated['title'],
         'slug' => Str::slug($validated['slug']),
-        'deskripsi' => $validated['deskripsi'],
-        'gambar' => $path,
+        'description' => $validated['description'],
+        'event_date' => $validated['event_date'],
+        'location' => $validated['location'],
+        'image' => $path,
     ]);
 
-    return redirect('/event')->with('success', 'Event berhasil ditambahkan!');
+    return redirect()->route('admin.event.index')->with('success', 'Event berhasil ditambahkan!');
 }
 
 public function adminIndex()
 {
     $events = Event::all();
-    return view('admin.eventIndex', compact('events'));
+    return view('Admin.events.eventIndex', compact('events'));
 }
 
 public function edit($id)
 {
     $event = Event::findOrFail($id);
-    return view('admin.eventEdit', compact('event'));
+    return view('Admin.events.eventEdit', compact('event'));
 }
 
 public function update(Request $request, $id)
@@ -63,22 +67,28 @@ public function update(Request $request, $id)
     $event = Event::findOrFail($id);
 
     $validated = $request->validate([
-        'judul' => 'required|string|max:255',
+        'title' => 'required|string|max:255',
         'slug' => 'required|string|max:255|unique:events,slug,' . $id,
-        'deskripsi' => 'required|string',
-        'gambar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        'description' => 'required|string',
+        'event_date' => 'required|date',
+        'location' => 'required|string|max:255',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
     ]);
 
-    if ($request->hasFile('gambar')) {
-        $path = $request->file('gambar')->store('events', 'public');
-        $validated['gambar'] = $path;
+    if ($request->hasFile('image')) {
+        $path = $request->file('image')->store('events', 'public');
+        $validated['image'] = $path;
+    } else {
+        $validated['image'] = $event->image;
     }
 
     $validated['slug'] = Str::slug($validated['slug']);
+
     $event->update($validated);
 
     return redirect()->route('admin.event.index')->with('success', 'Event berhasil diperbarui!');
 }
+
 
 public function destroy($id)
 {
