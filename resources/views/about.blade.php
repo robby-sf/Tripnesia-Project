@@ -7,6 +7,9 @@
   <link rel="icon" type="png" href="/Asset/icon Web.png">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   @vite('resources/css/app.css')
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
   <title>Tripnesia</title>
 
   <style>[x-cloak] { display: none; }</style>
