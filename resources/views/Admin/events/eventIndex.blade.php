@@ -45,7 +45,6 @@
             <thead class="bg-blue-900 text-white uppercase">
             <tr>
                 <th class="px-6 py-3">Judul</th>
-                <th class="px-6 py-3">Slug</th>
                 <th class="px-6 py-3">Deskripsi</th>
                 <th class="px-6 py-3">Tanggal</th>
                 <th class="px-6 py-3">Lokasi</th>
@@ -56,7 +55,6 @@
             @foreach($events as $event)
             <tr class="hover:bg-gray-50 transition">
                 <td class="px-6 py-4 font-semibold">{{ $event->title }}</td>
-                <td class="px-6 py-4">{{ $event->slug }}</td>
                 <td class="px-6 py-4">{{ Str::limit($event->description, 50) }}</td>
                 <td class="px-6 py-4">{{ \Carbon\Carbon::parse($event->event_date)->format('d M Y') }}</td>
                 <td class="px-6 py-4">{{ $event->location }}</td>
