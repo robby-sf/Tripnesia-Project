@@ -81,7 +81,6 @@ Route::middleware(['auth:admin'])->prefix('admin')->name('admin.')->group(functi
 });
 
 Route::middleware(['auth:admin'])->group(function () {
-
     Route::get('/admin/destination-data', [DestinationController::class, 'data'])->name('Destinations');
     Route::get('/admin/destination/create', [DestinationController::class, 'create'])->name('create');
     Route::post('/admin/destination/create', [DestinationController::class, 'store'])->name('store');
