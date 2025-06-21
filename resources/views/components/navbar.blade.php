@@ -1,7 +1,7 @@
 <nav  x-data="{ open: false, mobileMenuOpen:false }" class="fixed left-0 top-0  w-full z-50" >
     <div class="relative  text-white">
         <div class="bg-[#2C3E50] text-white flex flex-row items-center flex-nowrap gap-5 p-3 justify-between">
-          <a href="#"><img src="/Asset/Logo Tripnesia.png" alt="Logo Tripnesia" class=" h-8"></a>
+          <a href="/"><img src="/Asset/Logo Tripnesia.png" alt="Logo Tripnesia" class=" h-8"></a>
           <form action="{{ route('search') }}" method="GET" class="flex w-[30%] bg-white rounded-full items-center p-2 mr-5">
                 <button type="submit" class="ml-3 text-gray-500">
                     <!-- Ikon kaca pembesar -->

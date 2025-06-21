@@ -10,28 +10,36 @@ use App\Models\Destination;
 class ReviewSeeder extends Seeder
 {
     public function run(): void
-    {
-        // Ambil user dan destinasi (asumsi sudah ada lewat seeder sebelumnya)
-        $andi = User::where('email', 'andi@example.com')->first();
-        $sari = User::where('email', 'sari@example.com')->first();
+        {
+            $users = User::all();
+            $destinations = Destination::all();
 
-        $kuta = Destination::where('slug', 'pantai-kuta')->first();
-        $bajo = Destination::where('slug', 'labuan-bajo')->first();
+            $comments = [
+                'Sangat menyenangkan!',
+                'Tempatnya bersih dan indah.',
+                'Cocok untuk liburan keluarga.',
+                'Pemandangan luar biasa.',
+                'Akan datang lagi lain waktu.',
+                'Pelayanan di sekitar lokasi cukup baik.',
+                'Harga terjangkau untuk pengalaman yang didapat.',
+                'Kurang fasilitas umum, tapi oke secara keseluruhan.',
+                'Pengalaman yang tak terlupakan!',
+                'Rekomendasi banget buat wisata alam.',
+            ];
 
-        // Ulasan oleh Andi
-        Reviews::create([
-            'user_id' => $andi->id,
-            'destination_id' => $kuta->id,
-            'rating' => 5,
-            'comment' => 'Pantainya sangat indah dan bersih. Sunset-nya luar biasa!',
-        ]);
+            foreach ($destinations as $destination) {
+                // Ambil 7 user acak (atau semua jika user < 7)
+                $selectedUsers = $users->shuffle()->take(7);
 
-        // Ulasan oleh Sari
-        Reviews::create([
-            'user_id' => $sari->id,
-            'destination_id' => $bajo->id,
-            'rating' => 4,
-            'comment' => 'Tempatnya ramai tapi sangat seru. Banyak pilihan makanan!',
-        ]);
-    }
+                foreach ($selectedUsers as $user) {
+                    Reviews::create([
+                        'user_id' => $user->id,
+                        'destination_id' => $destination->id,
+                        'rating' => rand(3, 5),
+                        'comment' => $comments[array_rand($comments)],
+                    ]);
+                }
+            }
+        }
+    
 }
