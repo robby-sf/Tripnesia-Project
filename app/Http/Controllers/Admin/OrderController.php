@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Midtrans\Config;
 use Illuminate\Support\Facades\Validator;
+use App\Events\TicketConfirmed;
+
 
 class OrderController extends Controller
 {
@@ -87,6 +89,14 @@ class OrderController extends Controller
         }
 
         $transaction->save();
+
+        $successMessage = 'Status pesanan berhasil diperbarui menjadi ' . ucfirst($newStatus);
+
+        if ($newStatus === 'confirmed' && $oldStatus !== 'confirmed') {
+            event(new TicketConfirmed($transaction));
+            $successMessage .= ' dan tiket sedang dikirim ke pelanggan.';
+            Log::info("TicketConfirmed event fired for order {$transaction->order_id}.");
+        }
 
         Log::info("Admin (ID: {$adminId}) manually updated order (ID: {$transaction->order_id}) status from '{$oldStatus}' to '{$newStatus}'.");
 
