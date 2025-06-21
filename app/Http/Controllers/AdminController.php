@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -28,7 +29,9 @@ class AdminController extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+
         $remember = $request->has('remember');
+
 
         if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $remember)) {
             $request->session()->regenerate();
@@ -40,6 +43,7 @@ class AdminController extends Controller
                 'admin_name' => $admin->nama,
                 'admin_role' => $admin->role,
             ]);
+
             
             return redirect()->intended('/admin');
         }

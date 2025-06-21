@@ -16,6 +16,10 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\Admin\AdminPackageController;
+use App\Http\Controllers\PasswordResetLinkController;
+use App\Http\Controllers\NewPasswordController;
+use App\Http\Controllers\Admin\Auth\AdminPasswordResetLinkController;
+use App\Http\Controllers\Admin\Auth\AdminNewPasswordController;
 
 
 Route::get('/', function () {
@@ -60,6 +64,21 @@ Route::post('/register/admin', [AdminController::class, 'register'])->name('admi
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
+
+
+Route::middleware('guest')->group(function () {
+    Route::get('/forgot-password', [PasswordResetLinkController::class, 'create'])->name('password.request');
+    Route::post('/forgot-password', [PasswordResetLinkController::class, 'store'])->name('password.email');
+    Route::get('/reset-password/{token}', [NewPasswordController::class, 'create'])->name('password.reset');
+    Route::post('/reset-password', [NewPasswordController::class, 'store'])->name('password.update');
+});
+
+Route::prefix('admin')->middleware('guest:admin')->group(function () {
+    Route::get('/forgot-password', [AdminPasswordResetLinkController::class, 'create'])->name('admin.password.request');
+    Route::post('/forgot-password', [AdminPasswordResetLinkController::class, 'store'])->name('admin.password.email');
+    Route::get('/admin/reset-password/{token}', [AdminNewPasswordController::class, 'create'])->name('admin.password.reset');
+    Route::post('/reset-password', [AdminNewPasswordController::class, 'store'])->name('admin.password.update');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/checkout/{id}', [CheckoutController::class, 'show'])->name('checkout.show');

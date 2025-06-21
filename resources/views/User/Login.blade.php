@@ -80,7 +80,7 @@
                     </label>
                 </div>
                 <div class="text-sm">
-                    <a href="#" class="font-medium text-blue-600 hover:text-blue-500 hover:underline">
+                    <a href="{{ route('password.request') }}" class="font-medium text-blue-600 hover:text-blue-500 hover:underline">
                         Forgot Password?
                     </a>
                 </div>
