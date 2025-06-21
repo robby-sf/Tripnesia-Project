@@ -21,7 +21,6 @@ class AdminSeeder extends Seeder
             'tanggal_lahir' => '1990-01-01',
             'role' => 'superadmin',
             'nomor_telp' => '0811111111',
-            'profilePicture' => 'default.jpg',
         ]);
 
         Admin::create([
@@ -32,7 +31,6 @@ class AdminSeeder extends Seeder
             'tanggal_lahir' => '1991-02-02',
             'role' => 'admin',
             'nomor_telp' => '0811111112',
-            'profilePicture' => 'default.jpg',
         ]);
 
         Admin::create([
@@ -43,7 +41,6 @@ class AdminSeeder extends Seeder
             'tanggal_lahir' => '1992-03-03',
             'role' => 'admin',
             'nomor_telp' => '0811111113',
-            'profilePicture' => 'default.jpg',
         ]);
 
         Admin::create([
@@ -54,7 +51,6 @@ class AdminSeeder extends Seeder
             'tanggal_lahir' => '1993-04-04',
             'role' => 'admin',
             'nomor_telp' => '0811111114',
-            'profilePicture' => 'default.jpg',
         ]);
 
         Admin::create([
@@ -65,7 +61,6 @@ class AdminSeeder extends Seeder
             'tanggal_lahir' => '1994-05-05',
             'role' => 'admin',
             'nomor_telp' => '0811111115',
-            'profilePicture' => 'default.jpg',
         ]);
 
         Admin::create([
@@ -76,7 +71,6 @@ class AdminSeeder extends Seeder
             'tanggal_lahir' => '1995-06-06',
             'role' => 'admin',
             'nomor_telp' => '0811111116',
-            'profilePicture' => 'default.jpg',
         ]);
 
         Admin::create([
@@ -87,7 +81,6 @@ class AdminSeeder extends Seeder
             'tanggal_lahir' => '1996-07-07',
             'role' => 'admin',
             'nomor_telp' => '0811111117',
-            'profilePicture' => 'default.jpg',
         ]);
 
         Admin::create([
@@ -98,7 +91,6 @@ class AdminSeeder extends Seeder
             'tanggal_lahir' => '1997-08-08',
             'role' => 'admin',
             'nomor_telp' => '0811111118',
-            'profilePicture' => 'default.jpg',
         ]);
 
         Admin::create([
@@ -109,7 +101,6 @@ class AdminSeeder extends Seeder
             'tanggal_lahir' => '1998-09-09',
             'role' => 'admin',
             'nomor_telp' => '0811111119',
-            'profilePicture' => 'default.jpg',
         ]);
 
         Admin::create([
@@ -120,7 +111,6 @@ class AdminSeeder extends Seeder
             'tanggal_lahir' => '1999-10-10',
             'role' => 'admin',
             'nomor_telp' => '0811111120',
-            'profilePicture' => 'default.jpg',
         ]);
     }
 }

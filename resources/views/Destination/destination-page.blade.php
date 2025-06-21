@@ -13,6 +13,15 @@
         [x-cloak] {
             display: none;
         }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
     </style>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
@@ -49,7 +58,7 @@
         <div class="border-t pt-6">
             <h2 class="text-2xl font-bold text-gray-800 mb-4">Ulasan Pengunjung</h2>
 
-            <div class="max-h-80 overflow-y-auto space-y-4 mb-8 pr-2">
+            <div class="max-h-80 overflow-y-auto no-scrollbar space-y-4 mb-8 pr-2">
                 @forelse ($destination->reviews as $review)
                     <div class="bg-gray-100 p-4 rounded-lg shadow">
                         <div class="flex justify-between items-center">
@@ -85,7 +94,6 @@
                         @csrf
                         <input type="hidden" name="destination_id" value="{{ $destination->id }}">
 
-                        <!-- Rating Bintang -->
                         <div x-data="{ rating: 0 }" class="flex items-center space-x-1">
                             <input type="hidden" name="rating" x-model="rating">
                             <template x-for="star in 5" :key="star">
@@ -100,13 +108,12 @@
                             </template>
                         </div>
 
-                        <!-- Komentar -->
                         <textarea name="comment" rows="4" placeholder="Tulis komentar Anda..."
-                            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            class="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
                             required></textarea>
 
                         <button type="submit"
-                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg">
+                            class="bg-[#2C3E50] hover:bg-[#374e64] text-white font-semibold py-2 px-4 rounded-lg">
                             Kirim Ulasan
                         </button>
                     </form>
