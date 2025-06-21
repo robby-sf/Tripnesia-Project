@@ -8,14 +8,18 @@ use Illuminate\Http\Request;
 
 class DestinationController extends Controller
 {
+    
     public function index() {
         $destination = Destination::all();
         return view('Destination.destination',  ['destination' => $destination]); 
     }
 
     public function show($slug) {
-    $destination = Destination::where('slug', $slug)->firstOrFail();
+    $destination = Destination::with('reviews.user')
+                    ->where('slug', $slug)
+                    ->firstOrFail();
     return view('Destination.destination-page', ['destination' => $destination]);
+
     }
 
     public function data(){

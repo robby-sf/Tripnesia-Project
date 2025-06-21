@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="png" href="/Asset/icon Web.png">
     <title>Tripnesia</title>
     @vite('resources/css/app.css')
     <style>

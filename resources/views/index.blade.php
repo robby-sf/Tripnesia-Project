@@ -36,81 +36,73 @@
   </div>
   </section>
 
-  <!-- Rekomendasi wisata -->
-  <div class="flex flex-col p-8">
-    <h2 class="font-bold text-2xl lg:text-4xl text-center mb-5">Rekomendasi Pejalanan Untukmu</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-      <div class="rounded-lg shadow hover:shadow-lg transition">
-        <img src="/Asset/Bali.jpg" alt="Pura bali" class="w-full h-48 object-cover rounded-t-lg">
-        <div class="p-5">
-          <h4 class="text-xl font-semibold ">Bali</h4>
-          <p>Jelajahi keindahan alam bali</p>
-        </div>
-      </div>
-
-      <div class="rounded-lg shadow hover:shadow-lg transition">
-        <img src="/Asset/Bromo.avif" alt="Pura bali" class="w-full h-48 object-cover rounded-t-lg">
-        <div class="p-5">
-          <h4 class="text-xl font-semibold ">Bromo</h4>
-          <p>Jelajahi keindahan alam bali</p>
-        </div>
-      </div>
-
-      <div class="rounded-lg shadow hover:shadow-lg transition">
-        <img src="/Asset/Raja Ampat.jpg" alt="Pura bali" class="w-full h-48 object-cover rounded-t-lg">
-        <div class="p-5">
-          <h4 class="text-xl font-semibold ">Raja Ampat</h4>
-          <p>Jelajahi keindahan alam bali</p>
-        </div>
-      </div>
-
+    <!-- Event -->
+  <section class="max-w-7xl mx-auto py-12 px-6">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-3xl font-bold">Event Populer</h2>
+      <a href="/event" class="text-blue-600 hover:underline">View More</a>
     </div>
-
-  </div>
-
-  <!-- Rekomendasi Paket Perjalanan-->
-  <main class="flex flex-col p-8">
-    <h2 class="font-bold text-2xl lg:text-4xl text-center mb-5">Paket Perjalanan Untuk Kamu</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-      <div class="rounded-lg shadow hover:shadow-lg transition">
-        <img src="/Asset/Bali.jpg" alt="Pura bali" class="w-full h-48 object-cover rounded-t-lg">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      @foreach ($events->take(6) as $event)
+      <a href="{{ route('events.show', $event->slug) }}" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden block">
+        <img src="{{ asset('storage/events/' . $event->image) }}" class="w-full h-48 object-cover">
         <div class="p-5">
-          <h4 class="text-xl font-semibold ">Bali</h4>
-          <p>Jelajahi keindahan alam bali</p>
-          <div class="flex items-center">
-            <span class="text-yellow-500 mr-1">★★★★☆</span> 
-            <span class="text-gray-500">(4.5)</span>
-          </div>
+          <h3 class="text-xl font-semibold">{{ $event->title }}</h3>
+          <p class="text-gray-600 text-sm">{{ Str::limit($event->description, 80) }}</p>
         </div>
-      </div>
-
-      <div class="rounded-lg shadow hover:shadow-lg transition">
-        <img src="/Asset/Bromo.avif" alt="Pura bali" class="w-full h-48 object-cover rounded-t-lg">
-        <div class="p-5">
-          <h4 class="text-xl font-semibold ">Bromo</h4>
-          <p>Jelajahi keindahan alam bali</p>
-          <div class="flex items-center">
-            <span class="text-yellow-500 mr-1">★★★☆☆</span> 
-            <span class="text-gray-500">(3.8)</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="rounded-lg shadow hover:shadow-lg transition">
-        <img src="/Asset/Raja Ampat.jpg" alt="Pura bali" class="w-full h-48 object-cover rounded-t-lg">
-        <div class="p-5">
-          <h4 class="text-xl font-semibold ">Raja Ampat</h4>
-          <p>Jelajahi keindahan alam bali</p>
-          <div class="flex items-center">
-            <span class="text-yellow-500 mr-1">★★★★☆</span> 
-            <span class="text-gray-500">(4.8)</span>
-          </div>
-        </div>
-      </div>
-
+      </a>
+      @endforeach
     </div>
+  </section>
+
+  <!-- Destination -->
+  <section class="max-w-7xl mx-auto py-12 px-6">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-3xl font-bold">Destinasi Favorit</h2>
+      <a href="/destination" class="text-blue-600 hover:underline">View More</a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      @foreach ($destinations->take(6) as $destination)
+      <a href="/destination/{{ $destination->slug }}" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden block">
+        <img src="{{ asset('storage/Asset/' . $destination->gambar) }}" class="w-full h-48 object-cover">
+        <div class="p-5">
+          <h3 class="text-xl font-semibold">{{ $destination->nama }}</h3>
+          <p class="text-gray-600 text-sm">{{ Str::limit($destination->deskripsi, 80) }}</p>
+        </div>
+      </a>
+      @endforeach
+    </div>
+  </section>
+
+  <!-- Package -->
+  <section class="max-w-7xl mx-auto py-12 px-6">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-3xl font-bold">Paket Perjalanan</h2>
+      <a href="/package" class="text-blue-600 hover:underline">View More</a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      @foreach ($packages->take(6) as $package)
+      <a href="{{ route('checkout.show', $package->id) }}" class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden block">
+        <img src="{{ asset('storage/' . $package->image) }}" class="w-full h-48 object-cover">
+        <div class="p-5">
+          <h3 class="text-xl font-semibold">{{ $package->name }}</h3>
+          <p class="text-gray-600 text-sm">{{ Str::limit($package->description, 80) }}</p>
+          <p class="text-sm font-bold text-green-600 mt-2">Rp {{ number_format($package->price, 0, ',', '.') }}</p>
+        </div>
+      </a>
+      @endforeach
+    </div>
+  </section>
+
+  <!-- Floating Chat Button WhatsApp -->
+  <a href="https://wa.me/62895391671188" target="_blank"
+     class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full shadow-lg flex items-center gap-2 z-50">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12a9 9 0 11-16.29-5.64L3 21l6.36-1.71A9 9 0 1121 12z"></path>
+      <path d="M16 12.5c-.5.5-1.17 1-2 1.5s-1.5 1.5-2 1.5-1.5-1-2-1.5-1.5-1.5-2-2-1-1.17-1-2 .5-2 1.5-2.5"></path>
+    </svg>
+    Chat
+  </a>
 
   </main>
 

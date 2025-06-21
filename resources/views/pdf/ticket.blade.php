@@ -4,6 +4,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>E-Ticket - {{ $transaction->order_id }}</title>
+    <link rel="icon" type="png" href="/Asset/icon Web.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 

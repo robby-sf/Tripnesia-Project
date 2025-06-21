@@ -3,6 +3,7 @@
 
 <head>
     <title>Tiket Anda Telah Diterbitkan</title>
+    <link rel="icon" type="png" href="/Asset/icon Web.png">
 </head>
 
 <body>

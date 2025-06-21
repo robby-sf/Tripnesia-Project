@@ -7,7 +7,7 @@
   @vite('resources/css/app.css')
   <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
-  <link rel="icon" type="image/png" href="/Asset/Logo Tripnesia.PNG">
+  <link rel="icon" type="png" href="/Asset/icon Web.png">
   <title>Login - Tripnesia</title>
   <style>
     [x-cloak] { display: none !important; }

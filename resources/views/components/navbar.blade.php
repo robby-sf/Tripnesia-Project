@@ -32,18 +32,14 @@
           @auth
               
           <div class="hidden md:flex md:flex-row">
-              <div class="ml-4 flex items-center md:ml-6">
-                  <button type="button" class="text-gray-300 hover:text-white">
-                      <svg class="size-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/>
-                      </svg>
-                  </button>
-              </div>
+              <div class=" font-semibold text-white">
+                {{ Auth::user()->nama ?? 'User Name' }}
+            </div>
 
               <div class="relative ml-5">
                   <div>
-                      <button @click="open = !open" type="button" class="relative flex items-center rounded-full w-8 h-8 ring-gray-600">
-                          <img src="/storage/Asset/{{ Auth::user()->profilePicture ?? 'profilekosong.jpg' }}" alt="foto profile" class="rounded-full size-8">
+                      <button @click="open = !open" type="button" class="relative flex items-center rounded-full size-8 ring-gray-600">
+                          <img src="/storage/Asset/{{ Auth::user()->profilePicture ?? 'profilekosong.jpg' }}" alt="foto profile" class="rounded-full ">
                       </button>
 
                       <div 
@@ -57,7 +53,7 @@
                             <div class="shrink-0">
                                 <img src="/Storage/Asset/{{ Auth::user()->profilePicture ?? 'profilekosong.jpg' }}" alt="foto profile" class="rounded-full size-8">
                             </div>
-                            <div class="ml-3">
+                            <div class="ml-3 w-40">
                                 <div class="text-base/4 font-medium text-gray-400">{{ Auth::user()->nama ?? 'Guest Account' }}</div>
                                 <div class="text-sm font-medium text-gray-400">{{ Auth::user()->email ?? 'guest@gmail.com' }}</div>
                             </div>

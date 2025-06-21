@@ -45,7 +45,7 @@ class AdminController extends Controller
             ]);
 
             
-            return redirect()->intended('/admin');
+            return redirect()->intended('/admin/dashboard');
         }
 
         return back()->withErrors([
@@ -86,7 +86,7 @@ class AdminController extends Controller
 
         Auth::guard('admin')->login($admin);
 
-        return redirect('/admin');
+        return redirect('/admin/dashboard');
     }
 
     public function update(Request $request)

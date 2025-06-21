@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
-    <link rel="icon" type="png" href="/Asset/Logo Tripnesia.PNG">
+    <link rel="icon" type="png" href="/Asset/icon Web.png">
     @vite('resources/css/app.css')
     <title>Lupa Password - Tripnesia</title>
 </head>
