@@ -223,7 +223,7 @@
                                         }
                                     }).finally(() => {
                                         alert(
-                                            "Pembayaran berhasil! Pesanan Anda sedang menunggu konfirmasi dari admin."
+                                            "Pembayaran berhasil! Pesanan Anda sedang menunggu konfirmasi dari admin, dan cek email anda."
                                         );
                                         window.location.href =
                                             "{{ route('home') }}";
