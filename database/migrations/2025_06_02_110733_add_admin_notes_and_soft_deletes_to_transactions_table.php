@@ -31,7 +31,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('transactions', function (Blueprint $table) {
-            // Hapus kolom jika migrasi di-rollback
             if (Schema::hasColumn('transactions', 'admin_notes')) {
                 $table->dropColumn('admin_notes');
             }

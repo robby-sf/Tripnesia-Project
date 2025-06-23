@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // Nama paket
-            $table->string('image'); // Nama file gambar
-            $table->text('description'); // Deskripsi paket
-            $table->decimal('price', 10, 2); // Harga paket
+            $table->string('name');
+            $table->string('image');
+            $table->text('description');
+            $table->decimal('price', 10, 2);
             $table->timestamps();
         });
     }
