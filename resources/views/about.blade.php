@@ -130,7 +130,7 @@
       <div class="flex flex-col items-center text-center bg-white rounded-lg shadow-lg p-8 transition-all duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-2">
         <img class="size-48 rounded-full object-cover border-4 border-gray-100" src="{{ asset('storage/Creator/shofi.jpg') }}" alt="Foto profil anggota tim">
         <div class="mt-6">
-          <h3 class="text-xl font-semibold leading-7 tracking-tight text-gray-900">Shofi Zahrotun Aulia</h3>
+          <h3 class="text-xl font-semibold leading-7 tracking-tight text-gray-900">Shofi Zahrotul Aulia</h3>
           <p class="text-base font-semibold leading-6 text-indigo-600">Requirement Analisyt</p>
         </div>
         <div class="mt-6 flex items-center justify-center gap-x-6">
