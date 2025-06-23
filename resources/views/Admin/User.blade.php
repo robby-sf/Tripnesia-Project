@@ -29,7 +29,7 @@
 
         <main class="flex flex-col w-full">
             
-            <x-admin-navbar class="bg-gray-100 w-full">Daftar User</x-admin-navbar>   
+            <x-admin-navbar class="bg-gray-100 w-full">User List</x-admin-navbar>   
             <div class="flex-1 p-6">
 
                 <div class="bg-white shadow rounded-lg overflow-hidden">

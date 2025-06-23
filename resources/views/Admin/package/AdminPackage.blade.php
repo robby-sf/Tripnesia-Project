@@ -26,7 +26,7 @@
         <main class="flex flex-col w-full">
 
             <x-admin-navbar class="bg-gray-100 w-full">
-                {{ $title ?? 'Kelola Paket' }}
+                {{ 'Package List' }}
             </x-admin-navbar>
 
             <div class="flex-1 p-6 md:p-8">

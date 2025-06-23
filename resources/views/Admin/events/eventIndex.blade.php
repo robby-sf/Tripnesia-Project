@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" type="png" href="/Asset/icon Web.png">
   @vite('resources/css/app.css')
-  <title>Daftar Event - Tripnesia</title>
+  <title>Event List- Tripnesia</title>
 
   <style>[x-cloak] { display: none; }</style>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
@@ -23,11 +23,9 @@
     </div>
 
     <main class="flex flex-col w-full">
-      <x-admin-navbar class="bg-gray-100 w-full">Event</x-admin-navbar>   
+      <x-admin-navbar class="bg-gray-100 w-full">Event List</x-admin-navbar>   
 
       <div class="flex-1 p-6">
-        <h1 class="text-2xl font-bold mb-4">Data Event</h1>
-
         @if(session('success'))
           <div class="bg-green-100 text-green-800 p-3 rounded mb-4">
             {{ session('success') }}

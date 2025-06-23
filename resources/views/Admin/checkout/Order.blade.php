@@ -67,7 +67,7 @@
         <main class="flex flex-col w-full">
 
             <x-admin-navbar class="bg-gray-100 w-full">
-                {{ $title ?? 'Daftar Pesanan' }}
+                {{ 'Order List' }}
             </x-admin-navbar>
 
             <div class="flex-1 p-6 md:p-8">

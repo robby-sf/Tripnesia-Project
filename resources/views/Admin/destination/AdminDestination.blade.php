@@ -29,7 +29,7 @@
 
         <main class="flex flex-col w-full">
             
-            <x-admin-navbar class="bg-gray-100 w-full">Destination</x-admin-navbar>   
+            <x-admin-navbar class="bg-gray-100 w-full">Destination List</x-admin-navbar>   
             <div class="flex-1 p-6">
                 
                 <div class="flex justify-end mb-4">

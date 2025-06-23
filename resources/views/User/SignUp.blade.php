@@ -91,7 +91,7 @@ style="background-image: url('/Asset/LoginBack.jpg');">
 
                 <div class="mb-4 relative">
                     <label class="block text-sm font-medium text-gray-600">Confirmation Password</label>
-                    <input :type="show ? 'text' : 'confimation_password'"
+                    <input :type="show ? 'text' : 'password'"
                         class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-400 focus:outline-none"
                         style="background-color: #EBDCC5;" name="password_confirmation" required>
                     <div class="absolute inset-y-0 right-0 top-7 pr-3 flex items-center cursor-pointer" @click="show = !show">
