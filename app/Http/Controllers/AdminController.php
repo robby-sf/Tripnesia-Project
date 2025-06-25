@@ -94,7 +94,6 @@ class AdminController extends Controller
         /** @var \App\Models\Admin $admin */
         $admin = Auth::guard('admin')->user();
 
-        // Validasi data
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $admin->id,
@@ -105,24 +104,20 @@ class AdminController extends Controller
             'profile_picture' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        // Update data dasar
         $admin->nama = $validated['nama'];
         $admin->email = $validated['email'];
         $admin->nomor_telp = $validated['nomor_telp'] ?? null;
         $admin->alamat = $validated['alamat'];
         $admin->tanggal_lahir = $validated['tanggal_lahir'];
 
-        // Update password jika ada
         if (!empty($validated['password'])) {
             $admin->password = Hash::make($validated['password']);
         }
 
-        // Hapus foto jika diminta
         if ($request->has('hapus_foto')) {
             $admin->profile_picture = 'profileKosong.jpg';
         }
 
-        // Upload foto jika ada
         if ($request->hasFile('profile_picture')) {
             
             $file = $request->file('profile_picture');
@@ -130,7 +125,6 @@ class AdminController extends Controller
             $destination = public_path('storage/Asset');
             $filename = $request->file('profile_picture')->hashName();
             $file->move($destination, $filename);
-            // $request->file('profilePicture')->storeAs('Asset', $filename, 'public');
             $admin->profile_picture = $filename;
         }
 

@@ -9,7 +9,7 @@ class AdminUserController extends Controller
 {
     public function index()
     {
-        $users = User::all(); // variabel $users lebih baik jamak
+        $users = User::all();
         return view('Admin.User', compact('users'));
     }
 }

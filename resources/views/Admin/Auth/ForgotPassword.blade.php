@@ -14,7 +14,6 @@
 <body class="bg-gray-50 min-h-screen flex items-center justify-center p-4">
     <div class="bg-white rounded-lg shadow-xl p-8 max-w-md w-full text-gray-800">
         <div class="flex justify-center mb-6">
-            {{-- This is a placeholder for the illustration. In a real app, you'd use an SVG or image here --}}
             <img src="{{ asset('storage/Asset/Forgot.png') }}" alt="Forgot Password Illustration" class="w-24 h-24 mb-4">
         </div>
         

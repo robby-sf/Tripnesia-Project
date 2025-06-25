@@ -55,7 +55,6 @@
         </nav>
     </div>
 
-    <!-- Bagian Bawah: Logout -->
     <div class="px-4 py-6">
         <form method="POST" action="{{ route('admin.logout') }}">
             @csrf

@@ -1,26 +1,20 @@
 <header class="sticky top-0 bg-white border-b border-gray-200 ">
     <div class="h-16 flex items-center justify-between px-6">
         
-        <!-- Slot untuk Judul Halaman -->
         <div>
             <h1 class="text-2xl font-bold text-gray-800">{{ $slot ?? 'Page Title' }}</h1>
-            <!-- Ganti 'Page Title' dengan variabel default atau biarkan kosong -->
         </div>
 
-        <!-- Ikon dan Profil Pengguna -->
         <div class="flex items-center space-x-5">
             
             <div class="text-gray-800 font-semibold">
                 {{ Auth::guard('admin')->user()->nama ?? 'User Name' }}
             </div>
-            
-            <!-- Dropdown Profil Pengguna (Menggunakan Alpine.js dari kode Anda) -->
             <div x-data="{ open: false }" class="relative">
                 <button @click="open = !open" type="button" class="flex items-center rounded-full transition">
                     <img class="h-9 w-9 rounded-full object-cover" src="/storage/Asset/{{ Auth::guard('admin')->user()->profile_picture ?? 'profilekosong.jpg' }}" alt="Foto Profil">
                 </button>
 
-                <!-- Menu Dropdown -->
                 <div 
                     x-cloak
                     x-show="open"
@@ -33,7 +27,6 @@
                     @click.outside="open = false"
                     class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100 z-50"
                 >
-                    <!-- Info Pengguna -->
                     <div class="px-4 py-3 border-b border-gray-100">
                         <p class="text-sm font-semibold text-gray-800"></p>
                         <p class="text-xs text-gray-500 truncate">{{ Auth::guard('admin')->user()->email ?? 'guest@gmail.com' }}</p>

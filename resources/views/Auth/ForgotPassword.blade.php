@@ -16,7 +16,6 @@
 
     <div class="relative z-10 bg-amber-50 rounded-lg shadow-2xl p-8 max-w-md w-full text-gray-800">
         <div class="flex justify-center mb-2">
-            {{-- Using the Tripnesia logo for consistency --}}
             <img src="/Asset/Logo Tripnesia.PNG" alt="Tripnesia Logo" class="w-20">
         </div>
 

@@ -12,7 +12,6 @@ class SearchController extends Controller
     {
         $term = $request->get('term');
 
-        // Ambil 5 dari masing-masing tabel
         $destinations = Destination::where('nama', 'like', "%$term%")
             ->limit(5)
             ->pluck('nama');
@@ -21,7 +20,6 @@ class SearchController extends Controller
             ->limit(5)
             ->pluck('title');
 
-        // Gabungkan hasil dan hilangkan duplikat
         $results = $destinations->merge($events)->unique()->values();
 
         return response()->json($results);
@@ -31,7 +29,6 @@ class SearchController extends Controller
     {
         $query = $request->input('search');
 
-        // Ambil data dari 2 tabel
         $destinations = Destination::where('nama', 'like', "%$query%")
         ->take(10)
         ->get();
@@ -39,7 +36,6 @@ class SearchController extends Controller
         ->take(10)
         ->get();
 
-        // Kirim ke view
         return view('Search.Result', compact('query', 'destinations', 'events'));
     }
 }

@@ -24,7 +24,6 @@ use App\Http\Controllers\Admin\Auth\AdminNewPasswordController;
 use App\Http\Controllers\ReviewController;
 
 
-//PUBLIC
 Route::get('/', [HomeController::class, 'index'])->name('home');;
 Route::get('/package', [PackageController::class, 'index']);
 Route::get('/about', function () {return view('about');});

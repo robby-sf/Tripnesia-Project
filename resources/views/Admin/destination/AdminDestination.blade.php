@@ -61,7 +61,6 @@
                                 <td class="px-6 py-4">{{ \Carbon\Carbon::parse($dest->jam_tutup)->format('H:i') }}</td>
                                 <td class="px-6 py-4">Rp{{ number_format($dest->harga, 0, ',', '.') }}</td>
                                 <td class="px-6 py-4 flex items-center space-x-7 justify-center">
-                                    <!-- Detail (Magnifying Glass) -->
                                     <a href="/destination/{{ $dest->slug }}" class="text-blue-600 hover:text-blue-800" title="Detail">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                             viewBox="0 0 24 24" stroke="currentColor">

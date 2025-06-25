@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Destination;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 class DestinationController extends Controller
@@ -37,6 +37,8 @@ class DestinationController extends Controller
 
     public function store(Request $request) {
 
+        Log::info('Request diterima', ['request' => $request->all()]);
+        Log::info('Apakah ada file gambar?', ['hasFile' => $request->hasFile('gambar')]);
         $validated = $request -> validate([
             'nama' => 'required|string|max:100',
             'deskripsi' => 'required|string',
@@ -60,7 +62,8 @@ class DestinationController extends Controller
         $validated['slug'] = $slug;
 
         if($request -> hasFile('gambar')) {
-            $validated['gambar'] = $request -> file('gambar') -> store('Asset','public');
+            $path = $request->file('gambar')->store('Asset', 'public');
+            $validated['gambar'] = basename($path);
         }
 
         Destination::create($validated);
@@ -91,7 +94,8 @@ class DestinationController extends Controller
         $destination = Destination::findOrFail($id);
 
         if ($request->hasFile('gambar')) {
-            $validated['gambar'] = $request->file('gambar')->store('Asset', 'public');
+            $path = $request->file('gambar')->store('Asset', 'public');
+            $validated['gambar'] = basename($path);
         } else {
             unset($validated['gambar']);
         }

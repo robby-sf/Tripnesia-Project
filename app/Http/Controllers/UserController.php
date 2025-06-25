@@ -19,7 +19,6 @@ class UserController extends Controller
         /** @var \App\Models\User $user */
         $user = Auth::guard('web')->user();
 
-        // Validasi data
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $user->id,
@@ -28,22 +27,18 @@ class UserController extends Controller
             'profilePicture' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
-        // Update data dasar
         $user->nama = $validated['nama'];
         $user->email = $validated['email'];
         $user->nomorTelp = $validated['nomorTelp'] ?? null;
 
-        // Update password jika ada
         if (!empty($validated['password'])) {
             $user->password = Hash::make($validated['password']);
         }
 
-        // Hapus foto jika diminta
         if ($request->has('hapus_foto')) {
             $user->profilePicture = 'profileKosong.jpg';
         }
 
-        // Upload foto jika ada
         if ($request->hasFile('profilePicture')) {
             
             $file = $request->file('profilePicture');
@@ -58,7 +53,6 @@ class UserController extends Controller
             Log::info('Path:', ['path' => $file->getPathname()]);
             $filename = $request->file('profilePicture')->hashName();
             $file->move($destination, $filename);
-            // $request->file('profilePicture')->storeAs('Asset', $filename, 'public');
             $user->profilePicture = $filename;
         }
 

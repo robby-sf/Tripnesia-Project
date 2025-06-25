@@ -26,9 +26,7 @@
 
 </head>
 <body class="h-full">
-  <!-- Navigasi -->
   <x-Navbar></x-Navbar>
-  <!-- Sambutan -->
   <section
   class="h-screen bg-cover bg-center"
   style="background-image: url('{{ asset('Asset/Bromo.avif') }}');">
@@ -37,7 +35,6 @@
   </div>
   </section>
 
-    <!-- Event -->
   <section class="max-w-7xl mx-auto py-12 px-6">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-3xl font-bold">Event Populer</h2>
@@ -56,7 +53,6 @@
     </div>
   </section>
 
-  <!-- Destination -->
   <section class="max-w-7xl mx-auto py-12 px-6">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-3xl font-bold">Destinasi Favorit</h2>
@@ -75,7 +71,6 @@
     </div>
   </section>
 
-  <!-- Package -->
   <section class="max-w-7xl mx-auto py-12 px-6">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-3xl font-bold">Paket Perjalanan</h2>
@@ -95,7 +90,6 @@
     </div>
   </section>
 
-  <!-- Floating Chat Button WhatsApp -->
   <a href="https://wa.me/62895391671188" target="_blank"
      class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-full shadow-lg flex items-center gap-2 z-50">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
