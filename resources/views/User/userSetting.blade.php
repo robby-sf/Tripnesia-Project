@@ -29,7 +29,7 @@
             <div class="flex items-center space-x-6">
                 <div class="relative">
                     <img src="{{ asset('storage/Asset/' . ($user->profilePicture ?? 'profilekosong.jpg')) }}" alt="Profile Picture" class="size-20 rounded-full object-cover ring-2 ring-offset-2 ring-gray-300">
-                    {{-- <span class="absolute bottom-0 right-0 block h-5 w-5 rounded-full bg-green-500 border-2 border-white"></span> --}}
+                    
                 </div>
 
                 <div class="flex flex-col space-y-2">
@@ -37,7 +37,7 @@
                         <label for="profilePicture" class="cursor-pointer rounded-md bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-800 hover:text-gray-300 transition-colors duration-200">
                             Ubah Foto
                         </label>
-                        <input type="file" name="profilePicture">
+                        <input type="file" id="profilePicture" name="profilePicture">
                     </div>
                     <button type="submit" name="hapus_foto" value="1"
                         class="text-sm font-semibold text-red-500 hover:text-red-300 transition-colors duration-200 mt-2">
