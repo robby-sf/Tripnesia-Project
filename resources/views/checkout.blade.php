@@ -9,6 +9,7 @@
     <title>Checkout - {{ $package->name }}</title>
     @vite('resources/css/app.css')
 
+      <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js"
         data-client-key="{{ config('midtrans.client_key') }}"></script>
 
